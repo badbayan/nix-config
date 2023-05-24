@@ -1,0 +1,98 @@
+{
+  "nodes": {
+    "emacs-overlay": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1684720667,
+        "narHash": "sha256-vjuRiKEcSoFFcXnkLr/30B5xeN9hPH9b6+7hxsKV57Y=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "4f65398a9b2739e61db17ddbc1642117f1a5c1ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1673540789,
+        "narHash": "sha256-xqnxBOK3qctIeUVxecydrEDbEXjsvHCPGPbvsl63M/U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0f213d0fee84280d8c3a97f7469b988d6fe5fcdf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "emacs-overlay": "emacs-overlay",
+        "nixpkgs": [
+          "stable"
+        ],
+        "stable": "stable",
+        "unstable": "unstable"
+      }
+    },
+    "stable": {
+      "locked": {
+        "lastModified": 1684580438,
+        "narHash": "sha256-LUPswmDn6fXP3lEBJFA2Id8PkcYDgzUilevWackYVvQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7dc71aef32e8faf065cb171700792cf8a65c152d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1684570954,
+        "narHash": "sha256-FX5y4Sm87RWwfu9PI71XFvuRpZLowh00FQpIJ1WfXqE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
