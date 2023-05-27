@@ -64,6 +64,7 @@
       shellAliases = {
         ls = "ls --color=auto";
         grep = "grep --color=auto";
+        diff = "diff --color=auto";
         ee = "emacsclient -nw -c -q -u -a 'emacs -nw'";
       };
       autosuggestions.enable = true;

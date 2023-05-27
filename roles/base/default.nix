@@ -22,6 +22,7 @@ in
     };
 
     systemPackages = with pkgs; [
+      _7zz
       binutils
       curl
       dig
@@ -33,7 +34,7 @@ in
       ncdu
       nmap
       nvi
-      p7zip
+      #p7zip
       pinentry-curses
       (procps.overrideAttrs (attrs: {
         meta.priority = pkgs.coreutils.meta.priority + 1;

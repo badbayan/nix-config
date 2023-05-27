@@ -2,7 +2,7 @@
   description = "NixOS configuration";
 
   inputs = {
-    stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "stable";
 
@@ -24,7 +24,7 @@
       };
     in {
       nixosConfigurations = {
-        yama = mkSystem "x86_64-linux" ./hosts/yama.nix;
+        yama = mkSystem "x86_64-linux" ./hosts/yama;
       };
     };
 }

@@ -6,7 +6,7 @@
       aya = {
         isNormalUser = true;
         description = "badbayan";
-        extraGroups = [ "wheel" "audio" "video" "kvm" "adbusers" ];
+        extraGroups = [ "wheel" "audio" "video" "kvm" "libvirtd" "adbusers" ];
         createHome = true;
         homeMode = "711";
       };

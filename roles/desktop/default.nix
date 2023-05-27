@@ -13,13 +13,18 @@
   xdg = {
     autostart.enable = true;
     icons.enable = true;
-    portal.enable = true;
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+    };
   };
 
   programs = {
     adb.enable = true;
     dconf.enable = true;
+    gamemode.enable = true;
     gnupg.agent.enable = true;
+    steam.enable = true;
     xwayland.enable = true;
   };
 
@@ -37,6 +42,7 @@
     gsettings-desktop-schemas
     helvum
     imv
+    legendary-gl
     libnotify
     mednafen
     mednaffe
@@ -54,6 +60,7 @@
     polkit_gnome
     qemu
     ungoogled-chromium
+    virt-manager
     vulkan-tools
     wineWowPackages.waylandFull
     winetricks

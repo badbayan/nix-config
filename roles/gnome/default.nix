@@ -14,14 +14,13 @@
   services = {
     xserver = {
       enable = true;
-      autoRepeatDelay = 300;
-      autoRepeatInterval = 20;
-      layout = "us,ru";
-      libinput.enable = true;
-      xkbOptions = "ctrl:nocaps,grp:alts_toggle,grp_led:caps,misc:typo,srvrkeys:none";
-      xkbVariant = "";
-      excludePackages = with pkgs; [ xterm ];
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome = {
+        enable = true;
+        sessionPath = with pkgs; [
+          adw-gtk3
+          gnomeExtensions.alphabetical-app-grid
+        ];
+      };
       displayManager = {
         #autoLogin.enable = true;
         #autoLogin.user = "aya";
@@ -41,7 +40,7 @@
     };
   };
 
-  qt5 = {
+  qt = {
     enable = true;
     platformTheme = "gnome";
     style = "adwaita-dark";
@@ -59,7 +58,6 @@
     ]) ++ (with pkgs.gnome; [
       baobab
       cheese
-      eog
       epiphany
       evince
       evolution-data-server
@@ -70,7 +68,7 @@
       gnome-music
       gnome-software
       rygel
-      seahorse
+      #seahorse
       simple-scan
       totem
       yelp

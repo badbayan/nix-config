@@ -1,8 +1,6 @@
 { lib, pkgs, ... }:
 
 {
-  nixpkgs.overlays = [(new: prev: { miniflux = pkgs.unstable.miniflux; })];
-
   systemd = {
     services = {
       miniflux = {
@@ -16,7 +14,7 @@
   services = {
     miniflux = {
       enable = true;
-      adminCredentialsFile = "/root/miniflux.conf";
+      adminCredentialsFile = "/root/secrets/miniflux.env";
       config = {
         LISTEN_ADDR = "/run/miniflux/miniflux.sock";
         RUN_MIGRATIONS = "1";

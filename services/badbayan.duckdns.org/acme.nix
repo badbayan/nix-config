@@ -13,7 +13,7 @@
           domain = "*.badbayan.duckdns.org";
           extraDomainNames = [ "badbayan.duckdns.org" ];
           dnsProvider = "duckdns";
-          credentialsFile = "/root/duckdns.conf";
+          credentialsFile = "/root/secrets/acme/duckdns.env";
           dnsPropagationCheck = true;
           group = config.security.acme.defaults.group;
         };
