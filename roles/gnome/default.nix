@@ -1,7 +1,7 @@
-{  lib, pkgs, inputs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 {
-  imports = [ ../desktop ];
+  imports = with inputs.self; [ roles.desktop ];
 
   programs = {
     gnupg.agent.pinentryFlavor = "gnome3";
@@ -16,18 +16,18 @@
       enable = true;
       desktopManager.gnome = {
         enable = true;
-        sessionPath = with pkgs; [
+        sessionPath = (with pkgs; [
           adw-gtk3
-          gnomeExtensions.alphabetical-app-grid
-        ];
+        ]) ++ (with pkgs.gnomeExtensions; [
+          alphabetical-app-grid
+        ]);
       };
       displayManager = {
-        #autoLogin.enable = true;
-        #autoLogin.user = "aya";
         defaultSession = "gnome";
         gdm = {
           enable = true;
           autoSuspend = false;
+          wayland = true;
         };
       };
     };

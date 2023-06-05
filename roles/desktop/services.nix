@@ -11,6 +11,7 @@
     gnome = {
       at-spi2-core.enable = lib.mkForce false;
       evolution-data-server.enable = lib.mkForce false;
+      gnome-initial-setup.enable = lib.mkForce false;
       #gnome-keyring.enable = lib.mkForce false;
       rygel.enable = lib.mkForce false;
       tracker-miners.enable = lib.mkForce false;

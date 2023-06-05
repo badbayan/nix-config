@@ -11,6 +11,8 @@ in
     ./users.nix
   ];
 
+  system.stateVersion = "23.05";
+
   environment = {
     localBinInPath = true;
 
@@ -26,6 +28,7 @@ in
       binutils
       curl
       dig
+      direnv
       fd
       file
       fzf

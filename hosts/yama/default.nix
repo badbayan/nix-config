@@ -1,18 +1,18 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [
+  imports = with inputs.self; [
     ./hardware-configuration.nix
 
-    ../../services/openssh.nix
-    ../../services/dnsmasq.nix
-    ../../services/yggdrasil.nix
-    ../../services/minidlna.nix
+    services.openssh
+    services.dnsmasq
+    services.yggdrasil
+    services.minidlna
 
-    ../../services/postgresql.nix
-    ../../services/badbayan.duckdns.org
+    services.postgresql
+    services.badbayan.duckdns.org
 
-    ../../roles/gnome
+    roles.gnome
   ];
 
   i18n.defaultLocale = "ru_RU.UTF-8";
@@ -73,6 +73,4 @@
     archisteamfarm.enable = true;
     fstrim.enable = true;
   };
-
-  system.stateVersion = "22.11";
 }

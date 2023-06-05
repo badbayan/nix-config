@@ -1,11 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  nixpkgs.overlays = [(import inputs.emacs-overlay)];
-
   services.emacs = {
     enable = true;
     defaultEditor = true;
-    package = pkgs.emacsUnstablePgtk.override { nativeComp = false; };
+    package = pkgs.emacs-unstable-pgtk.override { nativeComp = false; };
   };
 }

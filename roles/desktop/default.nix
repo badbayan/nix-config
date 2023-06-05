@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
-  imports = [
-    ../base
+  imports = with inputs.self; [
+    roles.base
 
     ./hardware.nix
     ./fonts.nix
