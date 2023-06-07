@@ -1,5 +1,6 @@
 {
   dnsmasq = ./dnsmasq.nix;
+  emacs = ./emacs.nix;
   minidlna = ./minidlna.nix;
   openssh = ./openssh.nix;
   postgresql = ./postgresql.nix;

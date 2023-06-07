@@ -7,7 +7,6 @@
     ./hardware.nix
     ./fonts.nix
     ./services.nix
-    ./emacs.nix
   ];
 
   xdg = {
@@ -33,19 +32,14 @@
     bubblewrap
     easyeffects
     foot
-    gimp
     glib
     gnome.adwaita-icon-theme
     gnome.dconf-editor
     gnome.gnome-disk-utility
-    google-chrome
     gsettings-desktop-schemas
     helvum
     imv
-    legendary-gl
     libnotify
-    mednafen
-    mednaffe
     mesa-demos
     (mpv.override {
       scripts = [ mpvScripts.mpris ];
@@ -59,17 +53,12 @@
     podman
     polkit_gnome
     qemu
-    ungoogled-chromium
     virt-manager
     vulkan-tools
-    wineWowPackages.waylandFull
-    winetricks
-    (wrapOBS {
-      plugins = with pkgs.obs-studio-plugins; [ obs-vkcapture ];
-    })
     xdg-user-dirs
     xdg-utils
     xsettingsd
+    yt-dlp
     zathura
   ];
 }

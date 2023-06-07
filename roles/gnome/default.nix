@@ -35,6 +35,7 @@
 
   environment = {
     sessionVariables = {
+      QT_QPA_PLATFORM = "wayland-egl";
       XCURSOR_SIZE = "24";
       XCURSOR_THEME = "Adwaita";
     };

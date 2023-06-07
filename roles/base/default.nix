@@ -8,7 +8,6 @@ in
     ./nix.nix
     ./console.nix
     ./zsh.nix
-    ./users.nix
   ];
 
   system.stateVersion = "23.05";

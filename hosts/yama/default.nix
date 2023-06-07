@@ -12,7 +12,10 @@
     services.postgresql
     services.badbayan.duckdns.org
 
+    services.emacs
     roles.gnome
+
+    users.aya
   ];
 
   i18n.defaultLocale = "ru_RU.UTF-8";
@@ -60,7 +63,7 @@
             { # fail2banana.ru
               publicKey = "gcP/mUmJ1t1yWU1YKq1xMF53y9+COYooURmQuRTmLXM=";
               presharedKeyFile = "/root/secrets/wireguard/wg0-peer1.key";
-              endpoint = "fail2banana.ru:51820";
+              endpoint = "37.192.91.95:51820";
               allowedIPs = [ "10.0.0.50/32" ];
             }
           ];

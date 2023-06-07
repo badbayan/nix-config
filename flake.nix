@@ -6,6 +6,11 @@
     #unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "stable";
 
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
@@ -13,6 +18,7 @@
     { self
     , nixpkgs
     #, unstable
+    , home-manager
     , emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
@@ -26,12 +32,21 @@
                #unstable-overlay
                emacs-overlay.overlay
              ];})
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+            };
+          }
           conf
         ];
       };
     in {
+      home = import ./home;
       roles = import ./roles;
       services = import ./services;
+      users = import ./users;
+
       nixosConfigurations = {
         yama = mkSystem "x86_64-linux" ./hosts/yama;
       };
