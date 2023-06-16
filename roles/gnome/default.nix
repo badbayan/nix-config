@@ -19,7 +19,9 @@
         sessionPath = (with pkgs; [
           adw-gtk3
         ]) ++ (with pkgs.gnomeExtensions; [
+          allow-locked-remote-desktop
           alphabetical-app-grid
+          caffeine
         ]);
       };
       displayManager = {
@@ -33,12 +35,11 @@
     };
   };
 
-  environment = {
-    sessionVariables = {
-      QT_QPA_PLATFORM = "wayland-egl";
-      XCURSOR_SIZE = "24";
-      XCURSOR_THEME = "Adwaita";
-    };
+  environment.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland-egl";
+    SDL_VIDEODRIVER = "wayland";
+    XCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Adwaita";
   };
 
   qt = {

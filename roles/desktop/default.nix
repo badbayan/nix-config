@@ -40,6 +40,7 @@
     helvum
     imv
     libnotify
+    libva-utils
     mesa-demos
     (mpv.override {
       scripts = [ mpvScripts.mpris ];
@@ -50,10 +51,7 @@
     pavucontrol
     pinentry-gnome
     playerctl
-    podman
     polkit_gnome
-    qemu
-    virt-manager
     vulkan-tools
     xdg-user-dirs
     xdg-utils

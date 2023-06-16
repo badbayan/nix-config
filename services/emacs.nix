@@ -4,6 +4,6 @@
   services.emacs = {
     enable = true;
     defaultEditor = true;
-    package = pkgs.emacs-unstable-pgtk.override { nativeComp = false; };
+    package = pkgs.emacs29-pgtk.override { withNativeCompilation = false; };
   };
 }

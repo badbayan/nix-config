@@ -1,7 +1,7 @@
 {
   chromium = ./chromium.nix;
   dconf = ./dconf.nix;
-  #emacs = ./emacs.nix;
+  emacs = ./emacs.nix;
   git = ./git.nix;
   gtk = ./gtk.nix;
   mpv = ./mpv.nix;

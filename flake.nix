@@ -2,28 +2,32 @@
   description = "NixOS configuration";
 
   inputs = {
-    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    #unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.follows = "stable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixpkgs-stable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
   };
 
   outputs = inputs @
     { self
     , nixpkgs
-    #, unstable
+    #, nixpkgs-unstable
     , home-manager
     , emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
       #unstable-overlay = final: prev: {
-      #  unstable = unstable.legacyPackages.${prev.system};
+      #  nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${prev.system};
       #};
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;

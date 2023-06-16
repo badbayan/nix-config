@@ -22,7 +22,7 @@ with lib.hm.gvariant;
       cursor-theme = "Adwaita";
       document-font-name = "serif 10";
       font-antialiasing = "grayscale";
-      font-hinting = "full";
+      font-hinting = "slight";
       font-name = "sans 10";
       gtk-theme = "adw-gtk3";
       icon-theme = "Papirus-Dark";
@@ -92,12 +92,13 @@ with lib.hm.gvariant;
       toggle-fullscreen = [ "<Super>f" ];
     };
     "org/gnome/desktop/wm/preferences" = {
+      num-workspaces = 5;
       titlebar-font = "sans 10";
     };
 
     "org/gnome/mutter" = {
       attach-modal-dialogs = true;
-      dynamic-workspaces = true;
+      dynamic-workspaces = false;
       edge-tiling = true;
       workspaces-only-on-primary = true;
     };
@@ -122,7 +123,7 @@ with lib.hm.gvariant;
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
     };
-    "org/gnome/nautilus/preferences" = {
+    "org/gnome/nautilus/window-state" = {
       initial-size = mkTuple [ 890 850 ];
     };
 
@@ -150,14 +151,13 @@ with lib.hm.gvariant;
       sleep-inactive-ac-type = "nothing";
     };
 
-    "org/gnome/shell/app-switcher" = {
-      current-workspace-only = true;
-    };
     "org/gnome/shell" = {
       disabled-extensions = [];
       enabled-extensions = [
         "AlphabeticalAppGrid@stuarthayhurst"
-        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+        "allowlockedremotedesktop@kamens.us"
+        "caffeine@patapon.info"
+        #"workspace-indicator@gnome-shell-extensions.gcampax.github.com"
       ];
       favorite-apps = [
         "google-chrome.desktop"
@@ -166,6 +166,15 @@ with lib.hm.gvariant;
         "emacs.desktop"
         "org.gnome.Nautilus.desktop"
       ];
+    };
+    "org/gnome/shell/app-switcher" = {
+      current-workspace-only = true;
+    };
+    "org/gnome/shell/extensions/alphabetical-app-grid" = {
+      folder-order-position = "start";
+    };
+    "org/gnome/shell/extensions/caffeine" = {
+      show-indicator = "always";
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {

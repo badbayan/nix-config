@@ -13,6 +13,7 @@
     imports = with inputs.self.home; [
       chromium
       dconf
+      emacs
       git
       gtk
       mpv
@@ -29,6 +30,7 @@
       stateVersion = config.system.stateVersion;
 
       packages = with pkgs; [
+        crawlTiles
         element-desktop.desktopItem
         element-desktop-wayland
         google-chrome

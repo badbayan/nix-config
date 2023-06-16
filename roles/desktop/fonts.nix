@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  #environment.sessionVariables.FREETYPE_PROPERTIES = ''
+  #  autofitter:no-stem-darkening=0
+  #  autofitter:darkening-parameters=500,200,1000,100,1667,100,2333,0
+  #'';
+
   fonts = {
     enableDefaultFonts = true;
     fontDir.enable = true;
@@ -29,7 +34,7 @@
       hinting = {
         enable = true;
         autohint = false;
-        style = "hintfull";
+        style = "hintslight";
       };
       subpixel = {
         lcdfilter = "none";

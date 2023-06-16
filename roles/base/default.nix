@@ -16,6 +16,7 @@ in
     localBinInPath = true;
 
     sessionVariables = {
+      EDITOR = "vi";
       FZF_DEFAULT_COMMAND = find + " -tf";
       FZF_ALT_C_COMMAND = find + " -td";
       FZF_CTRL_T_COMMAND = find + " -tf";

@@ -1,19 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  systemd.services.nextcloud = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
-  };
-
   services = {
-    #postgresql = {
-    #  ensureDatabases = [ "nextcloud" ];
-    #  ensureUsers = [{
-    #    name = "nextcloud";
-    #    ensurePermissions = { "DATABASE nextcloud" = "ALL PRIVILEGES"; };
-    #  }];
-    #};
+    postgresql = {
+      ensureDatabases = [ "nextcloud" ];
+      ensureUsers = [{
+        name = "nextcloud";
+        ensurePermissions = { "DATABASE nextcloud" = "ALL PRIVILEGES"; };
+      }];
+    };
 
     nextcloud = {
       enable = true;

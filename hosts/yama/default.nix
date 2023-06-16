@@ -12,8 +12,8 @@
     services.postgresql
     services.badbayan.duckdns.org
 
-    services.emacs
     roles.gnome
+    roles.virt
 
     users.aya
   ];
@@ -45,6 +45,7 @@
       prefixLength = 64;
     }];
 
+    firewall.allowedTCPPorts = [ 3389 ];
     firewall.allowedUDPPorts = [ 51820 ];
 
     wireguard = {

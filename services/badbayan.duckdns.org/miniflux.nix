@@ -8,13 +8,13 @@
   };
 
   services = {
-    #postgresql = {
-    #  ensureDatabases = [ "miniflux" ];
-    #  ensureUsers = [{
-    #    name = "miniflux";
-    #    ensurePermissions = { "DATABASE miniflux" = "ALL PRIVILEGES"; };
-    #  }];
-    #};
+    postgresql = {
+      ensureDatabases = [ "miniflux" ];
+      ensureUsers = [{
+        name = "miniflux";
+        ensurePermissions = { "DATABASE miniflux" = "ALL PRIVILEGES"; };
+      }];
+    };
 
     miniflux = {
       enable = true;

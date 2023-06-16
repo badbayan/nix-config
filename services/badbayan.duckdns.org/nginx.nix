@@ -21,9 +21,9 @@
         forceSSL = true;
         enableACME = true;
         acmeRoot = null;
-        locations."/".root = "/home/aya/Public/org-home";
-        locations."/share/" = {
-          alias = "/home/aya/Public/share/";
+        locations."/".root = "/home/aya/org/homepage";
+        locations."/pub/" = {
+          alias = "/home/aya/Public/";
           extraConfig = ''
             autoindex on;
             autoindex_exact_size on;
@@ -55,9 +55,9 @@
         ];
         addSSL = false;
         serverName = "badbayan.ygg";
-        locations."/".root = "/home/aya/Public/org-home";
-        locations."/share/" = {
-          alias = "/home/aya/Public/share/";
+        locations."/".root = "/home/aya/org/homepage";
+        locations."/pub/" = {
+          alias = "/home/aya/Public/";
           extraConfig = ''
             autoindex on;
             autoindex_exact_size on;

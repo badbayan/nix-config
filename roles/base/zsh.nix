@@ -5,7 +5,6 @@
     pathsToLink = [
       "/libexec"
       "/share/zsh"
-      "/share/vim-plugins"
       "/share/wayland-sessions"
     ];
     shells = with pkgs; [ zsh ];
@@ -60,6 +59,11 @@
         zstyle ':completion:*' rehash true
         zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
         source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
+      '';
+      shellInit = ''
+        [[ -x "''$(command -v dircolors)" ]] && eval "''$(dircolors -b)"
+        [[ -s "/etc/profiles/per-user/''${USER}/etc/profile.d/hm-session-vars.sh" ]] && \
+            source "/etc/profiles/per-user/''${USER}/etc/profile.d/hm-session-vars.sh"
       '';
       shellAliases = {
         ls = "ls --color=auto";

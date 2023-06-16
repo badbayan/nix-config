@@ -28,9 +28,4 @@
       excludePackages = with pkgs; [ xterm ];
     };
   };
-
-  virtualisation = {
-    containers.enable = true;
-    libvirtd.enable = true;
-  };
 }
