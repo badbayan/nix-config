@@ -1,6 +1,15 @@
 { config, ... }:
-
-{
+let
+  homepage.root = "/home/aya/org/homepage";
+  public = {
+    alias = "/home/aya/Public/";
+    extraConfig = ''
+      autoindex on;
+      autoindex_exact_size on;
+      directio 4M;
+    '';
+  };
+in {
   users.users.nginx.extraGroups = [ "acme" ];
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
@@ -21,15 +30,8 @@
         forceSSL = true;
         enableACME = true;
         acmeRoot = null;
-        locations."/".root = "/home/aya/org/homepage";
-        locations."/pub/" = {
-          alias = "/home/aya/Public/";
-          extraConfig = ''
-            autoindex on;
-            autoindex_exact_size on;
-            directio 4M;
-          '';
-        };
+        locations."/".root = homepage.root;
+        locations."/pub/" = public;
         #locations."/.well-known/matrix/server" = {
         #  return = "200 '{ \"m.server\": \"matrix.${config.networking.domain}:443\" }'";
         #};
@@ -55,15 +57,8 @@
         ];
         addSSL = false;
         serverName = "badbayan.ygg";
-        locations."/".root = "/home/aya/org/homepage";
-        locations."/pub/" = {
-          alias = "/home/aya/Public/";
-          extraConfig = ''
-            autoindex on;
-            autoindex_exact_size on;
-            directio 4M;
-          '';
-        };
+        locations."/".root = homepage.root;
+        locations."/pub/" = public;
       };
     };
   };

@@ -11,11 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    };
+    #emacs-overlay = {
+    #  url = "github:nix-community/emacs-overlay";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #  inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    #};
   };
 
   outputs = inputs @
@@ -23,7 +23,7 @@
     , nixpkgs
     #, nixpkgs-unstable
     , home-manager
-    , emacs-overlay
+    #, emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
       #unstable-overlay = final: prev: {
@@ -34,7 +34,7 @@
         modules = [
           ({ nixpkgs.overlays = [
                #unstable-overlay
-               emacs-overlay.overlay
+               #emacs-overlay.overlay
              ];})
           home-manager.nixosModules.home-manager {
             home-manager = {

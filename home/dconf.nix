@@ -152,20 +152,10 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
+      disable-user-extensions = false;
       disabled-extensions = [];
-      enabled-extensions = [
-        "AlphabeticalAppGrid@stuarthayhurst"
-        "allowlockedremotedesktop@kamens.us"
-        "caffeine@patapon.info"
-        #"workspace-indicator@gnome-shell-extensions.gcampax.github.com"
-      ];
-      favorite-apps = [
-        "google-chrome.desktop"
-        "element-desktop.desktop"
-        "foot.desktop"
-        "emacs.desktop"
-        "org.gnome.Nautilus.desktop"
-      ];
+      #enabled-extensions = [];
+      #favorite-apps = [];
     };
     "org/gnome/shell/app-switcher" = {
       current-workspace-only = true;
@@ -175,15 +165,16 @@ with lib.hm.gvariant;
     };
     "org/gnome/shell/extensions/caffeine" = {
       show-indicator = "always";
+      show-notifications = false;
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {
-      show-hidden = true;
+      #show-hidden = true;
       sort-directories-first = true;
     };
 
     "org/gtk/settings/file-chooser" = {
-      show-hidden = true;
+      #show-hidden = true;
       sort-directories-first = true;
     };
   };

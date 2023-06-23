@@ -53,6 +53,7 @@ in {
             x = pad;
             y = pad;
           };
+          decorations_theme_variant = "Dark";
         };
         scrolling.history = scrollback;
         colors = {
@@ -96,7 +97,13 @@ in {
         };
         bell.urgent = "yes";
         scrollback.lines = scrollback;
-        csd.border-width = 2;
+        csd = {
+          border-color = "ff3e3e3e";
+          border-width = 2;
+          button-color = "ffffffff";
+          color = "ff303030";
+          hide-when-maximized = "yes";
+        };
         key-bindings = {
           scrollback-up-page = "Shift+Page_Up Shift+KP_Page_Up";
           scrollback-down-page = "Shift+Page_Down Shift+KP_Page_Down";

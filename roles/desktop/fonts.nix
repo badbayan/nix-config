@@ -10,7 +10,9 @@
     enableDefaultFonts = true;
     fontDir.enable = true;
     fonts = with pkgs; [
-      iosevka-bin
+      (iosevka-bin.override {
+        variant = "curly";
+      })
       liberation_ttf
       noto-fonts
       noto-fonts-cjk-sans
@@ -27,7 +29,8 @@
       cache32Bit = true;
       includeUserConf = true;
       defaultFonts = {
-        monospace = [ "Iosevka Term" "Source Code Pro" ];
+        #monospace = [ "Iosevka Term" ];
+        monospace = [ "Iosevka Term Curly" ];
         sansSerif = [ "Open Sans" "Noto Sans" ];
         serif = [ "Vollkorn" "Noto Serif" ];
       };

@@ -35,6 +35,7 @@ in
       git
       lsof
       ncdu
+      nix-direnv
       nmap
       nvi
       #p7zip
