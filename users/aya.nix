@@ -1,15 +1,16 @@
 { config, pkgs, inputs, ... }:
-
-{
-  users.users.aya = {
-    isNormalUser = true;
+let
+  user = "aya";
+in {
+  users.users.${user} = {
     description = "badbayan";
     extraGroups = [ "wheel" "audio" "video" "kvm" "libvirtd" "networkmanager" "adbusers" ];
-    createHome = true;
     homeMode = "711";
+    initialPassword = user;
+    isNormalUser = true;
   };
 
-  home-manager.users.aya = {
+  home-manager.users.${user} = {
     imports = with inputs.self.home; [
       chromium
       dconf

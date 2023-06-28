@@ -1,16 +1,17 @@
+{ lib, ... }:
+with lib;
 {
   services.dnsmasq = {
-    enable = true;
-    alwaysKeepRunning = true;
-    resolveLocalQueries = true;
+    alwaysKeepRunning = mkDefault true;
+    resolveLocalQueries = mkDefault true;
     settings = {
-      all-servers = true;
-      bogus-priv = true;
-      cache-size = 1500;
-      domain-needed = true;
-      no-negcache = true;
-      no-poll = true;
-      server = [
+      all-servers = mkDefault true;
+      bogus-priv = mkDefault true;
+      cache-size = mkDefault 1500;
+      domain-needed = mkDefault true;
+      no-negcache = mkDefault true;
+      no-poll = mkDefault true;
+      server = mkDefault [
         "8.8.8.8"
         "8.8.4.4"
         "1.1.1.1"

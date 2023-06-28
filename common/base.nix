@@ -1,19 +1,13 @@
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
+with lib;
 let
   find = "fd -calways -uE'.git' --strip-cwd-prefix";
-in
-{
-  imports = [
-    ./nix.nix
-    ./console.nix
-    ./zsh.nix
-  ];
-
-  system.stateVersion = "23.05";
+in {
+  i18n.defaultLocale = mkDefault "ru_RU.UTF-8";
+  time.timeZone = mkDefault "Asia/Novosibirsk";
 
   environment = {
-    localBinInPath = true;
+    localBinInPath = mkDefault true;
 
     sessionVariables = {
       EDITOR = "vi";
@@ -38,7 +32,6 @@ in
       nix-direnv
       nmap
       nvi
-      #p7zip
       pinentry-curses
       (procps.overrideAttrs (attrs: {
         meta.priority = pkgs.coreutils.meta.priority + 1;

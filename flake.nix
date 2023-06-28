@@ -26,14 +26,20 @@
     #, emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
-      #unstable-overlay = final: prev: {
-      #  nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-      #};
+      lsNix = dir:
+        builtins.listToAttrs (builtins.concatLists (builtins.attrValues
+          (builtins.mapAttrs (name: value: [{
+            name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
+            value = dir + "/${name}";
+          }]) (builtins.readDir dir))));
+      lsModules = dir: builtins.attrValues (lsNix dir);
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
-        modules = [
+        modules = ([
           ({ nixpkgs.overlays = [
-               #unstable-overlay
+               #(self: super: {
+               #  nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${super.system};
+               #})
                #emacs-overlay.overlay
              ];})
           home-manager.nixosModules.home-manager {
@@ -43,13 +49,16 @@
             };
           }
           conf
-        ];
+        ]) ++ (builtins.concatLists [
+          (lsModules ./common)
+          (lsModules ./roles)
+          (lsModules ./services)
+        ]);
       };
     in {
-      home = import ./home;
-      roles = import ./roles;
-      services = import ./services;
-      users = import ./users;
+      domains = lsNix ./domains;
+      home = lsNix ./home;
+      users = lsNix ./users;
 
       nixosConfigurations = {
         yama = mkSystem "x86_64-linux" ./hosts/yama;

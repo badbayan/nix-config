@@ -14,6 +14,10 @@
       volume = 100;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio/best";
     };
-    scripts = with pkgs.mpvScripts; [ mpris ];
+    scripts = with pkgs.mpvScripts; [
+      inhibit-gnome
+      mpris
+      uosc
+    ];
   };
 }

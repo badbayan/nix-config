@@ -4,33 +4,29 @@
   imports = with inputs.self; [
     ./hardware-configuration.nix
 
-    services.openssh
-    services.dnsmasq
-    services.yggdrasil
-    services.minidlna
-
-    services.postgresql
-    services.badbayan.duckdns.org
-
-    roles.gnome
-    roles.virt
-
+    domains."badbayan.duckdns.org"
     users.aya
   ];
 
-  i18n.defaultLocale = "ru_RU.UTF-8";
-  time.timeZone = "Asia/Novosibirsk";
+  roles = {
+    gnome.enable = true;
+    virt.enable = true;
+  };
 
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = false;
-      timeout = 2;
-    };
-
-    kernelParams = [ "quiet" "acpi_backlight=vendor" "tsc=nowatchdog" ];
-    kernelPackages = pkgs.linuxPackages_5_15;
-    tmp.useTmpfs = true;
+    loader.systemd-boot.enable = true;
+    kernelPackages = pkgs.linuxPackagesFor
+      (pkgs.linux_5_15.override {
+        argsOverride = rec {
+          version = "5.15.117";
+          modDirVersion = version;
+          src = pkgs.fetchurl {
+            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
+            sha256 = "17r3yyy4yzxyi4n1ri3sb42m9y1vnn4dcc0zli04n00f7hgk7a59";
+          };
+        };
+      });
+    kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 
   networking = {
@@ -75,6 +71,17 @@
 
   services = {
     archisteamfarm.enable = true;
+    dnsmasq.enable = true;
     fstrim.enable = true;
+    minidlna = {
+      enable = true;
+      settings.media_dir = [
+        "A,/home/aya/Music"
+        "V,/home/aya/Videos"
+      ];
+    };
+    openssh.enable = true;
+    postgresql.package = pkgs.postgresql_15;
+    yggdrasil.enable = true;
   };
 }

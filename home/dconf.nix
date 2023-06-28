@@ -16,7 +16,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/interface" = {
-      clock-show-seconds = true;
+      #clock-show-seconds = true;
       color-scheme = "prefer-dark";
       cursor-size = 24;
       cursor-theme = "Adwaita";

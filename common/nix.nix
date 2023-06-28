@@ -1,10 +1,20 @@
+{ lib, ... }:
+with lib;
 {
-  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "23.05";
+
+  nixpkgs.config.allowUnfree = mkDefault true;
+
+  virtualisation.vmVariant.virtualisation = {
+    cores = mkDefault 2;
+    memorySize = mkDefault 4096;
+  };
 
   nix = {
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      warn-dirty = false;
     };
 
     gc = {
