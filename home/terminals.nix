@@ -9,29 +9,29 @@ let
   scrollback = 10000;
 
   colors = {
-    background = "080808";
-    foreground = "b2b2b2";
+    background = "000000";
+    foreground = "ececec";
 
     normal = {
-      black = "323437";
+      black = "2c2c2c";
       red = "ff5454";
-      green = "8cc85f";
-      yellow = "e3c78a";
-      blue = "80a0ff";
-      magenta = "d183e8";
-      cyan = "79dac8";
-      white = "c6c6c6";
+      green = "4aa47a";
+      yellow = "dec26a";
+      blue = "6b9dff";
+      magenta = "cc82e4";
+      cyan = "84deed";
+      white = "bcbcbc";
     };
 
     bright = {
-      black = "949494";
-      red = "ff5189";
-      green = "36c692";
-      yellow = "c2c292";
-      blue = "74b2ff";
-      magenta = "ae81ff";
-      cyan = "85dc85";
-      white = "e4e4e4";
+      black = "767676";
+      red = "ff7c7c";
+      green = "8cc89c";
+      yellow = "d2d292";
+      blue = "86b6ff";
+      magenta = "ea96ff";
+      cyan = "92ffff";
+      white = "ececec";
     };
   };
 in {
