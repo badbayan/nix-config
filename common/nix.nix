@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, inputs, ... }:
 with lib;
 {
   system.stateVersion = "23.05";
@@ -11,6 +11,8 @@ with lib;
   };
 
   nix = {
+    registry.nixpkgs.flake = inputs.nixpkgs;
+
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
