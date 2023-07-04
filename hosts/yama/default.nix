@@ -15,17 +15,6 @@
 
   boot = {
     loader.systemd-boot.enable = true;
-    kernelPackages = pkgs.linuxPackagesFor
-      (pkgs.linux_5_15.override {
-        argsOverride = rec {
-          version = "5.15.117";
-          modDirVersion = version;
-          src = pkgs.fetchurl {
-            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-            sha256 = "17r3yyy4yzxyi4n1ri3sb42m9y1vnn4dcc0zli04n00f7hgk7a59";
-          };
-        };
-      });
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 
