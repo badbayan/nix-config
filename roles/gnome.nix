@@ -59,11 +59,6 @@ in {
     };
 
     environment = {
-      sessionVariables = {
-        QT_QPA_PLATFORM = "wayland-egl";
-        SDL_VIDEODRIVER = "wayland";
-      };
-
       gnome.excludePackages = (with pkgs; [
         at-spi2-atk
         at-spi2-core

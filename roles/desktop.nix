@@ -89,6 +89,8 @@ in {
         #  autofitter:no-stem-darkening=0
         #  autofitter:darkening-parameters=500,200,1000,100,1667,100,2333,0
         #'';
+        QT_QPA_PLATFORM = mkDefault "wayland-egl;wayland;xcb";
+        SDL_VIDEODRIVER = mkDefault "wayland";
         XCURSOR_SIZE = mkDefault "24";
         XCURSOR_THEME = mkDefault "Adwaita";
       };

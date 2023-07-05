@@ -65,7 +65,6 @@ in {
         gimp
         gzdoom
         legendary-gl
-        mame
         mednafen
         mednaffe
         wineWowPackages.waylandFull
