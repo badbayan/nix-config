@@ -20,15 +20,18 @@ in {
     systemPackages = with pkgs; [
       _7zz
       binutils
+      cifs-utils
       curl
       dig
       direnv
+      exfatprogs
       fd
       file
       fzf
       git
       lsof
       ncdu
+      nfs-utils
       nix-direnv
       nmap
       nvi

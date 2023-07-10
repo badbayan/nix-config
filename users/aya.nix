@@ -32,7 +32,7 @@ in {
           "allowlockedremotedesktop@kamens.us"
           "caffeine@patapon.info"
           #"gsconnect@andyholmes.github.io"
-          #"workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+          "overviewbackground@github.com.orbitcorrection"
         ];
         favorite-apps = [
           "google-chrome.desktop"
@@ -59,6 +59,7 @@ in {
 
       packages = with pkgs; [
         crawlTiles
+        deluge
         element-desktop.desktopItem
         element-desktop-wayland
         google-chrome

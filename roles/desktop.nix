@@ -128,6 +128,13 @@ in {
         xdg-user-dirs
         xdg-utils
         xsettingsd
+        (writeShellScriptBin "xterm" ''
+          if [ "$XDG_SESSION_TYPE" = wayland ]; then
+              exec foot -d warning -a "''${TERMCLASS:-foot}" "$@"
+          else
+              exec alacritty --class "''${TERMCLASS:-Alacritty},Alacritty" "$@"
+          fi
+        '')
         yt-dlp
         zathura
       ];

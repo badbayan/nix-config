@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.roles.server.nginx;
@@ -13,10 +13,9 @@ in {
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
-
     services.nginx = {
       enable = true;
+      additionalModules = with pkgs.nginxModules; [ dav fancyindex ];
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;

@@ -15,6 +15,7 @@
 
   boot = {
     loader.systemd-boot.enable = true;
+    kernelPackages = pkgs.linuxPackages_5_15;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 

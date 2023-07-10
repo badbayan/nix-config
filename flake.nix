@@ -61,6 +61,7 @@
       users = lsNix ./users;
 
       nixosConfigurations = {
+        nixos = mkSystem "x86_64-linux" ./hosts/nixos;
         yama = mkSystem "x86_64-linux" ./hosts/yama;
       };
     };

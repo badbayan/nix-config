@@ -7,8 +7,8 @@ let
   public = {
     alias = "/home/aya/Public/";
     extraConfig = ''
-      autoindex on;
-      autoindex_exact_size on;
+      fancyindex on;
+      fancyindex_exact_size on;
       directio 4M;
     '';
   };
@@ -44,6 +44,8 @@ in {
     extraDomainNames = [ domain ];
     group = config.security.acme.defaults.group;
   };
+
+  systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
 
   services.nginx.virtualHosts = {
     ${domain} = {
