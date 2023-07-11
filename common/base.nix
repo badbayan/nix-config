@@ -24,11 +24,13 @@ in {
       curl
       dig
       direnv
+      efibootmgr
       exfatprogs
       fd
       file
       fzf
       git
+      gptfdisk
       lsof
       ncdu
       nfs-utils

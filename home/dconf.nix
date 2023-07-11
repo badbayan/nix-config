@@ -149,7 +149,7 @@ with lib.hm.gvariant;
       name = "Foot";
     };
     "org/gnome/settings-daemon/plugins/power" = {
-      power-button-action = "nothing";
+      power-button-action = "interactive";
       sleep-inactive-ac-type = "nothing";
     };
 

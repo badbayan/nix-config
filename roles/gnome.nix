@@ -38,6 +38,7 @@ in {
           ]) ++ (with pkgs.gnomeExtensions; [
             allow-locked-remote-desktop
             alphabetical-app-grid
+            arcmenu
             bing-wallpaper-changer
             caffeine
             dash-to-panel
