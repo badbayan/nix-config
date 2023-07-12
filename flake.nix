@@ -62,6 +62,7 @@
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" ./hosts/nixos;
+        shrine = mkSystem "x86_64-linux" ./hosts/shrine;
         yama = mkSystem "x86_64-linux" ./hosts/yama;
       };
     };
