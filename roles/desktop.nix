@@ -89,6 +89,12 @@ in {
         #  autofitter:no-stem-darkening=0
         #  autofitter:darkening-parameters=500,200,1000,100,1667,100,2333,0
         #'';
+        GST_PLUGIN_SYSTEM_PATH_1_0 = makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs; [
+          gst_all_1.gst-libav
+          gst_all_1.gst-plugins-bad
+          gst_all_1.gst-plugins-good
+          gst_all_1.gst-plugins-ugly
+        ]);
         QT_QPA_PLATFORM = mkDefault "wayland-egl;wayland;xcb";
         SDL_VIDEODRIVER = mkDefault "wayland";
         XCURSOR_SIZE = mkDefault "24";

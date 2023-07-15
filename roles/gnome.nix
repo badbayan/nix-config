@@ -11,14 +11,19 @@ in {
   config = mkIf cfg.enable {
     roles.desktop.enable = mkForce true;
 
-    #nixpkgs.overlays = [(self: super: {
-    #  gnome = super.gnome.overrideScope' (gself: gsuper: {
-    #    gnome-session = gsuper.gnome-session.overrideAttrs (old: {
-    #      passthru.providedSessions =
-    #        old.passthru.providedSessions ++ [ "gnome-wayland" ];
-    #    });
-    #  });
-    #})];
+    nixpkgs.overlays = [(self: super: {
+      gnome = super.gnome.overrideScope' (gself: gsuper: {
+        #gnome-session = gsuper.gnome-session.overrideAttrs (old: {
+        #  passthru.providedSessions =
+        #    old.passthru.providedSessions ++ [ "gnome-wayland" ];
+        #});
+        nautilus = gsuper.nautilus.overrideAttrs (old: with pkgs; {
+          preFixup = old.preFixup + ''
+            gappsWrapperArgs+=(--prefix XDG_DATA_DIRS : "${gnome.totem}/share")
+          '';
+        });
+      });
+    })];
 
     programs = {
       gnupg.agent.pinentryFlavor = "gnome3";

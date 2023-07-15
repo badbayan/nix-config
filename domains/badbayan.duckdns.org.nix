@@ -35,6 +35,11 @@ in {
     #vaultwarden.enable = true;
   };
 
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/cache-priv-key.pem";
+  };
+
   security.acme.certs.${domain} = {
     credentialsFile = "/root/secrets/acme/${dns}.env";
     domain = "*." + domain;
@@ -55,6 +60,13 @@ in {
       acmeRoot = null;
       locations."/" = homepage;
       locations."/pub/" = public;
+    };
+
+    "nix.${domain}" = {
+      serverName = "nix." + domain;
+      forceSSL = true;
+      useACMEHost = domain;
+      locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
     };
 
     "*.${domain}" = {
