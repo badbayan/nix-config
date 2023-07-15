@@ -20,7 +20,7 @@ with lib;
         "https://nix.badbayan.duckdns.org/"
       ];
       trusted-public-keys = mkBefore [
-        "nix.badbayan.duckdns.org:wHB9g0MphPdgOxDkl0efXZCq75IuIiR1GB8jmODqd6Q="
+        "nix.badbayan.duckdns.org-1:qI75l0GHxICLk1ftwwL1rPqcml+krIzOtZdrRs9Zrlk="
       ];
       trusted-users = [
         "root"
