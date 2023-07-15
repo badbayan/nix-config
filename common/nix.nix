@@ -16,6 +16,12 @@ with lib;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      substituters = mkBefore [
+        "https://nix.badbayan.duckdns.org/"
+      ];
+      trusted-public-keys = mkBefore [
+        "nix.badbayan.duckdns.org-1:qI75l0GHxICLk1ftwwL1rPqcml+krIzOtZdrRs9Zrlk="
+      ];
       trusted-users = [
         "root"
         "@wheel"
