@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   dns = "duckdns";
   domain = "badbayan.duckdns.org";
@@ -37,6 +37,7 @@ in {
 
   services.nix-serve = {
     enable = true;
+    package = pkgs.nix-serve-ng;
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 

@@ -1,6 +1,15 @@
 {
   description = "NixOS configuration";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix.badbayan.duckdns.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix.badbayan.duckdns.org-1:qI75l0GHxICLk1ftwwL1rPqcml+krIzOtZdrRs9Zrlk="
+    ];
+  };
+
   inputs = {
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";

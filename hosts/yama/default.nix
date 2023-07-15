@@ -14,7 +14,10 @@
   };
 
   boot = {
-    loader.systemd-boot.enable = true;
+    loader = {
+      systemd-boot.enable = true;
+      timeout = 0;
+    };
     kernelPackages = pkgs.linuxPackages_5_15;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };

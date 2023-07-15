@@ -12,7 +12,7 @@ with lib;
     loader = {
       efi.canTouchEfiVariables = mkDefault false;
       systemd-boot.configurationLimit = mkDefault 100;
-      timeout = mkDefault 0;
+      timeout = mkDefault 2;
     };
     #plymouth.enable = mkDefault true;
     tmp.useTmpfs = mkDefault true;
