@@ -114,7 +114,7 @@ with lib.hm.gvariant;
       switch-to-session-7 = [];
       switch-to-session-8 = [];
       switch-to-session-9 = [];
-      switch-to-session-10 = [];
+      switch-to-session-10 = [ "<Primary><Alt>F10" ];
       switch-to-session-11 = [];
       switch-to-session-12 = [];
     };

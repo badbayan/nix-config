@@ -71,18 +71,18 @@ in {
       gnome.excludePackages = (with pkgs; [
         at-spi2-atk
         at-spi2-core
-        gnome-connections
+        #gnome-connections
         gnome-console
         gnome-photos
-        gnome-text-editor
+        #gnome-text-editor
         gnome-tour
       ]) ++ (with pkgs.gnome; [
         baobab
-        cheese
+        #cheese
         epiphany
         evince
         evolution-data-server
-        geary
+        #geary
         gnome-contacts
         gnome-font-viewer
         gnome-maps

@@ -28,7 +28,6 @@ in {
       firejail.enable = true;
       gamemode.enable = true;
       gnupg.agent.enable = true;
-      steam.enable = true;
       xwayland.enable = true;
     };
 
@@ -104,7 +103,6 @@ in {
       systemPackages = with pkgs; [
         alacritty
         bubblewrap
-        easyeffects
         foot
         glib
         gnome.adwaita-icon-theme

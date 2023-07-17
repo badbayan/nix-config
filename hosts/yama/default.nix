@@ -62,6 +62,8 @@
     };
   };
 
+  programs.steam.enable = true;
+
   services = {
     archisteamfarm.enable = true;
     dnsmasq.enable = true;
