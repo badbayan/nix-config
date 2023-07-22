@@ -1,9 +1,11 @@
 { config, pkgs, inputs, ... }:
 let
+  email = "badya65@gmail.com";
   user = "aya";
+  username = "badbayan";
 in {
   users.users.${user} = {
-    description = "badbayan";
+    description = username;
     extraGroups = [ "wheel" "audio" "video" "kvm" "libvirtd" "networkmanager" "adbusers" ];
     homeMode = "711";
     initialPassword = user;
@@ -26,6 +28,11 @@ in {
       xresources
       zathura
     ];
+
+    programs.git = {
+      userEmail = email;
+      userName = username;
+    };
 
     dconf.settings = {
       "org/gnome/shell" = {
