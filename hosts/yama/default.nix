@@ -22,6 +22,12 @@
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 
+  age.secrets = with inputs.self; {
+    yama-wg0.file = secrets.yama-wg0;
+    yama-wg0-oneplus.file = secrets.yama-wg0-oneplus;
+    yama-wg0-fail2banana.file = secrets.yama-wg0-fail2banana;
+  };
+
   networking = {
     hostName = "yama";
 
@@ -43,16 +49,16 @@
         wg0 = {
           ips = [ "10.0.0.1/24" ];
           listenPort = 51820;
-          privateKeyFile = "/root/secrets/wireguard/wg0.key";
+          privateKeyFile = config.age.secrets.yama-wg0.path;
           peers = [
             { # OnePlus
               publicKey = "i7tPC3P9xTMK6y6b+UU39Ez/hDd7p75iJchXXKxT/ww=";
-              presharedKeyFile = "/root/secrets/wireguard/wg0-peer0.key";
+              presharedKeyFile = config.age.secrets.yama-wg0-oneplus.path;
               allowedIPs = [ "10.0.0.10/32" ];
             }
             { # fail2banana.ru
               publicKey = "gcP/mUmJ1t1yWU1YKq1xMF53y9+COYooURmQuRTmLXM=";
-              presharedKeyFile = "/root/secrets/wireguard/wg0-peer1.key";
+              presharedKeyFile = config.age.secrets.yama-wg0-fail2banana.path;
               endpoint = "37.192.91.95:51820";
               allowedIPs = [ "10.0.0.50/32" ];
             }

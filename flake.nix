@@ -11,6 +11,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        darwin.follows = "";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     #emacs-overlay = {
     #  url = "github:nix-community/emacs-overlay";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -23,16 +32,22 @@
     , nixpkgs
     #, nixpkgs-unstable
     , home-manager
+    , agenix
     #, emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
-      lsNix = dir:
-        builtins.listToAttrs (builtins.concatLists (builtins.attrValues
-          (builtins.mapAttrs (name: value: [{
-            name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
-            value = dir + "/${name}";
-          }]) (builtins.readDir dir))));
-      lsModules = dir: builtins.attrValues (lsNix dir);
+      lsDir = dir:
+        builtins.removeAttrs (builtins.listToAttrs (builtins.concatLists (builtins.attrValues
+          (builtins.mapAttrs (name: type:
+            if type == "regular" then [{
+              name = builtins.elemAt (builtins.match "(.*)\\..*" name) 0;
+              value = dir + "/${name}";
+            }] else [{
+              name = type;
+              value = type;
+            }]) (builtins.readDir dir)))))
+          [ "flake" "default" "secrets" "directory" "symlink" "unknown" ];
+      lsModules = dir: builtins.attrValues (lsDir dir);
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = ([
@@ -48,6 +63,7 @@
               useUserPackages = true;
             };
           }
+          agenix.nixosModules.default
           conf
         ]) ++ (builtins.concatLists [
           (lsModules ./common)
@@ -56,9 +72,10 @@
         ]);
       };
     in {
-      domains = lsNix ./domains;
-      home = lsNix ./home;
-      users = lsNix ./users;
+      domains = lsDir ./domains;
+      home = lsDir ./home;
+      secrets = lsDir ./secrets;
+      users = lsDir ./users;
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" ./hosts/nixos;

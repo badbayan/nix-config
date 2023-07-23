@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   dns = "duckdns";
   domain = "badbayan.duckdns.org";
@@ -24,10 +24,13 @@ in {
     domain = domain;
     miniflux = {
       enable = true;
-      adminCredentialsFile = "/root/secrets/miniflux.env";
+      adminCredentialsFile = config.age.secrets.miniflux.path;
     };
     nginx.enable = true;
-    #nextcloud.enable = true;
+    #nextcloud = {
+    #  enable = true;
+    #  adminpassFile = config.age.secrets.nextcloud.path;
+    #};
     #prosody = {
     #  enable = true;
     #  admins = [ "badbayan@${domain}" ];
@@ -35,14 +38,37 @@ in {
     #vaultwarden.enable = true;
   };
 
+  age.secrets = with inputs.self; {
+    ${dns} = {
+      file = secrets.${dns};
+      group = "acme";
+      owner = "acme";
+    };
+    miniflux = {
+      file = secrets.miniflux;
+      group = "miniflux";
+      owner = "miniflux";
+    };
+    #nextcloud = {
+    #  file = secrets.nextcloud;
+    #  group = "nextcloud";
+    #  owner = "nextcloud";
+    #};
+    nix-serve = {
+      file = secrets.nix-serve;
+      group = "nix-serve";
+      owner = "nix-serve";
+    };
+  };
+
   services.nix-serve = {
     enable = true;
     package = pkgs.nix-serve-ng;
-    secretKeyFile = "/var/cache-priv-key.pem";
+    secretKeyFile = config.age.secrets.nix-serve.path;
   };
 
   security.acme.certs.${domain} = {
-    credentialsFile = "/root/secrets/acme/${dns}.env";
+    credentialsFile = config.age.secrets.${dns}.path;
     domain = "*." + domain;
     dnsPropagationCheck = true;
     dnsProvider = dns;
