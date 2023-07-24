@@ -26,6 +26,7 @@
     yama-wg0.file = secrets.yama-wg0;
     yama-wg0-oneplus.file = secrets.yama-wg0-oneplus;
     yama-wg0-fail2banana.file = secrets.yama-wg0-fail2banana;
+    yggdrasil.file = secrets.yggdrasil;
   };
 
   networking = {
@@ -83,6 +84,10 @@
     };
     openssh.enable = true;
     postgresql.package = pkgs.postgresql_15;
-    yggdrasil.enable = true;
+    yggdrasil = {
+      enable = true;
+      configFile = config.age.secrets.yggdrasil.path;
+      persistentKeys = false;
+    };
   };
 }

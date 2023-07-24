@@ -7,6 +7,7 @@ in {
   "miniflux.age".publicKeys = [ aya yama ];
   "nextcloud.age".publicKeys = [ aya yama ];
   "nix-serve.age".publicKeys = [ aya yama ];
+  "yggdrasil.age".publicKeys = [ aya yama ];
 
   "yama-wg0.age".publicKeys = [ aya yama ];
   "yama-wg0-oneplus.age".publicKeys = [ aya yama ];
