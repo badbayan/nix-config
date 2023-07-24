@@ -39,26 +39,14 @@ in {
   };
 
   age.secrets = with inputs.self; {
-    ${dns} = {
-      file = secrets.${dns};
-      group = "acme";
-      owner = "acme";
-    };
-    miniflux = {
-      file = secrets.miniflux;
-      group = "miniflux";
-      owner = "miniflux";
-    };
+    ${dns}.file = secrets.${dns};
+    miniflux.file = secrets.miniflux;
     #nextcloud = {
     #  file = secrets.nextcloud;
     #  group = "nextcloud";
     #  owner = "nextcloud";
     #};
-    nix-serve = {
-      file = secrets.nix-serve;
-      group = "nix-serve";
-      owner = "nix-serve";
-    };
+    nix-serve.file = secrets.nix-serve;
   };
 
   services.nix-serve = {
