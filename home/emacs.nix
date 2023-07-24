@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   disabled = import ./disabledapp.nix;
   emacs = pkgs.emacs29-pgtk.override { withNativeCompilation = false; };
@@ -20,7 +20,7 @@ in {
       ];
     };
     defaultEditor = true;
-    package = emacs;
+    package = config.programs.emacs.finalPackage;
     startWithUserSession = "graphical";
   };
 
