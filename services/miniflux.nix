@@ -13,7 +13,10 @@ in {
       type = types.str;
     };
     adminCredentialsFile = mkOption {
-      default = "${pkgs.writeText "minifluxPass" "pass"}";
+      default = "${pkgs.writeText "minifluxPass" ''
+        ADMIN_USERNAME="admin"
+        ADMIN_PASSWORD="password"
+      ''}";
       type = types.str;
     };
     pollingFrequency = mkOption {
