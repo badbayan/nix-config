@@ -11,6 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence.url = "github:nix-community/impermanence";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -32,6 +34,7 @@
     , nixpkgs
     #, nixpkgs-unstable
     , home-manager
+    , impermanence
     , agenix
     #, emacs-overlay
     , ... }: let
@@ -63,6 +66,7 @@
               useUserPackages = true;
             };
           }
+          impermanence.nixosModule
           agenix.nixosModules.default
           conf
         ]) ++ (builtins.concatLists [
@@ -79,6 +83,7 @@
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" ./hosts/nixos;
+        makai = mkSystem "x86_64-linux" ./hosts/makai;
         shrine = mkSystem "x86_64-linux" ./hosts/shrine;
         yama = mkSystem "x86_64-linux" ./hosts/yama;
       };
