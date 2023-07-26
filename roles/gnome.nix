@@ -71,7 +71,7 @@ in {
       gnome.excludePackages = (with pkgs; [
         at-spi2-atk
         at-spi2-core
-        #gnome-connections
+        gnome-connections
         gnome-console
         gnome-photos
         #gnome-text-editor

@@ -128,6 +128,7 @@ in {
         pinentry-gnome
         playerctl
         polkit_gnome
+        remmina
         vulkan-tools
         xdg-user-dirs
         xdg-utils
