@@ -71,6 +71,18 @@
 
   programs.steam.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    crawlTiles
+    deluge
+    easyeffects
+    gzdoom
+    legendary-gl
+    mednafen
+    mednaffe
+    wineWowPackages.waylandFull
+    winetricks
+  ];
+
   services = {
     archisteamfarm.enable = true;
     dnsmasq.enable = true;

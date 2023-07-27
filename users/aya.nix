@@ -67,19 +67,10 @@ in {
       stateVersion = config.system.stateVersion;
 
       packages = with pkgs; [
-        crawlTiles
-        deluge
-        easyeffects
         element-desktop.desktopItem
         element-desktop-wayland
         google-chrome
         gimp
-        gzdoom
-        legendary-gl
-        mednafen
-        mednaffe
-        wineWowPackages.waylandFull
-        winetricks
       ];
     };
   };

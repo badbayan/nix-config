@@ -24,6 +24,7 @@
   environment.persistence."/persist" = {
     directories = [
       "/etc/NetworkManager"
+      "/var/db/sudo"
       "/var/lib"
       "/var/log"
     ];
