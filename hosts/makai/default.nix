@@ -48,12 +48,14 @@
     networkmanager.enable = true;
   };
 
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "i965";
+  };
+
   services = {
     btrfs.autoScrub.enable = true;
-    yggdrasil = {
-      enable = true;
-      persistentKeys = true;
-    };
+    dnsmasq.enable = true;
+    yggdrasil.enable = true;
   };
 
   zramSwap.enable = true;

@@ -86,7 +86,6 @@
   services = {
     archisteamfarm.enable = true;
     dnsmasq.enable = true;
-    fstrim.enable = true;
     minidlna = {
       enable = true;
       settings.media_dir = [

@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-stable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -33,6 +34,7 @@
     { self
     , nixpkgs
     #, nixpkgs-unstable
+    , nixos-hardware
     , home-manager
     , impermanence
     , agenix
@@ -68,8 +70,7 @@
           }
           impermanence.nixosModule
           agenix.nixosModules.default
-          conf
-        ]) ++ (builtins.concatLists [
+        ]) ++ conf ++ (builtins.concatLists [
           (lsModules ./common)
           (lsModules ./roles)
           (lsModules ./services)
@@ -82,10 +83,22 @@
       users = lsDir ./users;
 
       nixosConfigurations = {
-        nixos = mkSystem "x86_64-linux" ./hosts/nixos;
-        makai = mkSystem "x86_64-linux" ./hosts/makai;
-        shrine = mkSystem "x86_64-linux" ./hosts/shrine;
-        yama = mkSystem "x86_64-linux" ./hosts/yama;
+        nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];
+        makai = mkSystem "x86_64-linux" [
+          nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge
+          nixos-hardware.nixosModules.common-pc-laptop-hdd
+          ./hosts/makai
+        ];
+        shrine = mkSystem "x86_64-linux" [
+          nixos-hardware.nixosModules.common-cpu-intel
+          nixos-hardware.nixosModules.common-pc-laptop-ssd
+          ./hosts/shrine
+        ];
+        yama = mkSystem "x86_64-linux" [
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-pc-ssd
+          ./hosts/yama
+        ];
       };
     };
 }

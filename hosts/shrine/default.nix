@@ -29,6 +29,5 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  services.fstrim.enable = true;
   zramSwap.enable = true;
 }
