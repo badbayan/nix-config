@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 let
   disabled = import ./disabledapp.nix;
-  emacs = pkgs.emacs29-pgtk.override { withNativeCompilation = false; };
+  emacs = (pkgs.emacs29-pgtk.override {
+    withNativeCompilation = false;
+    withTreeSitter = true;
+  }).pkgs.withPackages (epkgs: with epkgs; [
+    treesit-grammars.with-all-grammars
+  ]);
 in {
   programs.emacs = {
     enable = true;

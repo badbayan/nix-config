@@ -39,6 +39,7 @@ in {
         enabled-extensions = [
           "AlphabeticalAppGrid@stuarthayhurst"
           "allowlockedremotedesktop@kamens.us"
+          "BingWallpaper@ineffable-gmail.com"
           "caffeine@patapon.info"
           #"gsconnect@andyholmes.github.io"
           "overviewbackground@github.com.orbitcorrection"
@@ -50,6 +51,9 @@ in {
           "emacs.desktop"
           "org.gnome.Nautilus.desktop"
         ];
+      };
+      "org/gnome/shell/extensions/bingwallpaper" = {
+        set-background = false;
       };
 
       "org/gtk/gtk4/settings/file-chooser" = {
