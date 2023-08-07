@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   environment = {
@@ -27,7 +27,7 @@
     interactiveShellInit = ''
       WORDCHARS+=$'|'
       ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
-      PS1=$'%B%F{%(!.red.green)}%n@%m%f:%F{yellow}%~%f %#%b '
+      PS1=$'%B%F{%(!.red.green)}%n@%m%f:%F{yellow}%~%f %2(L.^%L.)%#%b '
       stty -ixon -ixoff
       bindkey -e
       bindkey "''${terminfo[kbs]:-^?}"        backward-delete-char

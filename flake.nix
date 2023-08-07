@@ -22,23 +22,15 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-
-    #emacs-overlay = {
-    #  url = "github:nix-community/emacs-overlay";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #  inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    #};
   };
 
   outputs = inputs @
     { self
     , nixpkgs
-    #, nixpkgs-unstable
     , nixos-hardware
     , home-manager
     , impermanence
     , agenix
-    #, emacs-overlay
     , ... }: let
       specialArgs = { inherit inputs; };
       lsDir = dir:
@@ -55,13 +47,7 @@
       lsModules = dir: builtins.attrValues (lsDir dir);
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
-        modules = ([
-          ({ nixpkgs.overlays = [
-               #(self: super: {
-               #  nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${super.system};
-               #})
-               #emacs-overlay.overlay
-             ];})
+        modules = [
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
@@ -70,7 +56,7 @@
           }
           impermanence.nixosModule
           agenix.nixosModules.default
-        ]) ++ conf ++ (builtins.concatLists [
+        ] ++ conf ++ (builtins.concatLists [
           (lsModules ./common)
           (lsModules ./roles)
           (lsModules ./services)
