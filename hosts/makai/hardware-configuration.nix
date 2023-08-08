@@ -18,10 +18,9 @@
       fsType = "tmpfs";
     };
 
-  fileSystems."/persist" =
+  fileSystems."/system" =
     { device = "/dev/disk/by-uuid/d8646471-3bfb-4e2a-ba23-5c3587911784";
       fsType = "btrfs";
-      options = [ "subvol=persist" ];
     };
 
   boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/2416383a-e744-4e4d-9dd3-52a039509064";

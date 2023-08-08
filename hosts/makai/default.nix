@@ -21,7 +21,7 @@
     kernelParams = [ "acpi_backlight=native" ];
   };
 
-  environment.persistence."/persist" = {
+  environment.persistence."/system/persist" = {
     directories = [
       "/etc/NetworkManager"
       "/var/db/sudo"
@@ -37,7 +37,7 @@
     "/".options = [ "size=1G" "mode=755" ];
     "/home".options = [ "compress=zstd" ];
     "/nix".options = [ "compress=zstd" "noatime" ];
-    "/persist" = {
+    "/system" = {
       neededForBoot = true;
       options = [ "compress=zstd" ];
     };
@@ -53,7 +53,10 @@
   };
 
   services = {
-    btrfs.autoScrub.enable = true;
+    btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/system" ];
+    };
     dnsmasq.enable = true;
     yggdrasil.enable = true;
   };
