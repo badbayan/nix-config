@@ -15,6 +15,7 @@ in {
       FZF_ALT_C_COMMAND = find + " -td";
       FZF_CTRL_T_COMMAND = find + " -tf";
       FZF_DEFAULT_OPTS = "--ansi";
+      FZF_TMUX = "1";
     };
 
     systemPackages = with pkgs; [
