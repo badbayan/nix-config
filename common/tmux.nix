@@ -5,5 +5,6 @@
     customPaneNavigationAndResize = true;
     historyLimit = 10000;
     keyMode = "vi";
+    terminal = "tmux-256color";
   };
 }
