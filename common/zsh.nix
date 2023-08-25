@@ -69,6 +69,7 @@
       grep = "grep --color=auto";
       diff = "diff --color=auto";
       ee = "emacsclient -nw -c -q -u -a 'emacs -nw'";
+      tmux = "systemd-run --user --scope tmux";
     };
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;

@@ -95,7 +95,8 @@ in {
           gst_all_1.gst-plugins-ugly
         ]);
         QT_QPA_PLATFORM = mkDefault "wayland-egl;wayland;xcb";
-        SDL_VIDEODRIVER = mkDefault "wayland";
+        SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = mkDefault "0";
+        SDL_VIDEODRIVER = mkDefault "wayland,x11";
         XCURSOR_SIZE = mkDefault "24";
         XCURSOR_THEME = mkDefault "Adwaita";
       };
