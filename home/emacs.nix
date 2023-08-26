@@ -1,15 +1,42 @@
 { config, pkgs, ... }:
 let
   disabled = import ./disabledapp.nix;
-  emacs = (pkgs.emacs29-pgtk.override {
+  emacs = pkgs.emacs29-pgtk.override {
     withNativeCompilation = false;
     withTreeSitter = true;
-  }).pkgs.withPackages (epkgs: with epkgs; [
-    treesit-grammars.with-all-grammars
-  ]);
+  };
 in {
+  home.file = {
+    ".emacs.d/early-init.el".source = ./emacs/early-init.el;
+    ".emacs.d/init.el".source = ./emacs/init.el;
+  };
+
   programs.emacs = {
     enable = true;
+    extraPackages = epkgs: with epkgs; [
+      almost-mono-themes
+      circadian
+      consult
+      corfu
+      envrc
+      evil
+      evil-collection
+      evil-easymotion
+      form-feed
+      haskell-mode
+      jinx
+      marginalia
+      markdown-mode
+      meson-mode
+      minions
+      nix-mode
+      treesit-grammars.with-all-grammars
+      undo-tree
+      use-package
+      vertico
+      yasnippet
+      zig-mode
+    ];
     package = emacs;
   };
 

@@ -18,6 +18,7 @@ in {
     imports = with inputs.self.home; [
       chromium
       dconf
+      dicts
       emacs
       git
       gtk
