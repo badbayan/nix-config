@@ -72,8 +72,7 @@ in {
       stateVersion = config.system.stateVersion;
 
       packages = with pkgs; [
-        element-desktop.desktopItem
-        element-desktop-wayland
+        element-desktop
         google-chrome
         gimp
       ];

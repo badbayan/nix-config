@@ -94,6 +94,7 @@ in {
           gst_all_1.gst-plugins-good
           gst_all_1.gst-plugins-ugly
         ]);
+        NIXOS_OZONE_WL = mkDefault "1";
         QT_QPA_PLATFORM = mkDefault "wayland-egl;wayland;xcb";
         SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = mkDefault "0";
         SDL_VIDEODRIVER = mkDefault "wayland,x11";
