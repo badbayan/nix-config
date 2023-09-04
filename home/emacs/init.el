@@ -246,16 +246,12 @@
     (sh-mode . bash-ts-mode))
   major-mode-remap-alist))
 
-;; (use-package go-mode :defer t)
 (use-package haskell-mode :defer t
   :hook (haskell-mode . interactive-haskell-mode))
 (use-package markdown-mode :defer t)
 (use-package meson-mode :defer t)
 (use-package nix-mode :defer t)
 ;; (use-package nix-ts-mode :defer t)
-;; (use-package rust-mode :defer t)
-;; (use-package racket-mode :defer t)
-;; (use-package yaml-mode :defer t)
 (use-package zig-mode :defer t)
 
 (use-package corfu
@@ -282,7 +278,6 @@
   (go-mode . eglot-ensure)
   (go-ts-mode . eglot-ensure)
   (haskell-mode . eglot-ensure)
-  (racket-mode . eglot-ensure)
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure)
   (zig-mode . eglot-ensure)

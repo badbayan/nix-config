@@ -25,6 +25,7 @@ in {
       form-feed
       haskell-mode
       jinx
+      magit
       marginalia
       markdown-mode
       meson-mode

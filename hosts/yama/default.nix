@@ -18,6 +18,7 @@
       systemd-boot.enable = true;
       timeout = 0;
     };
+    kernel.sysctl."kernel.sysrq" = mkDefault 1;
     kernelPackages = pkgs.linuxPackages_5_15;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
