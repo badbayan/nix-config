@@ -7,6 +7,11 @@
     nixpkgs.follows = "nixpkgs-stable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +33,7 @@
     { self
     , nixpkgs
     , nixos-hardware
+    , nix-index-database
     , home-manager
     , impermanence
     , agenix
@@ -48,6 +54,9 @@
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
+          nix-index-database.nixosModules.nix-index {
+            programs.nix-index-database.comma.enable = true;
+          }
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;

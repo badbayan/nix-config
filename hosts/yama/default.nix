@@ -19,7 +19,7 @@
       timeout = 0;
     };
     kernel.sysctl."kernel.sysrq" = 1;
-    kernelPackages = pkgs.linuxPackages_5_15;
+    kernelPackages = pkgs.linuxPackages_6_1;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 

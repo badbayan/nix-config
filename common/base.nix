@@ -35,8 +35,10 @@ in {
       lsof
       ncdu
       nfs-utils
+      nix-diff
       nix-direnv
       nmap
+      nvd
       nvi
       pinentry-curses
       (procps.overrideAttrs (attrs: {
