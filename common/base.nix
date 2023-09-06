@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 with lib;
 let
   find = "fd -calways -uE'.git' --strip-cwd-prefix";
@@ -35,6 +35,7 @@ in {
       lsof
       ncdu
       nfs-utils
+      nil
       nix-diff
       nix-direnv
       nmap

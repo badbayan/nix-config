@@ -1,9 +1,10 @@
 { config, pkgs, inputs, ... }:
 let
   user = "hatate";
+  username = "Taisa";
 in {
   users.users.${user} = {
-    description = "Taisa";
+    description = username;
     extraGroups = [ "wheel" "audio" "video" "networkmanager" ];
     initialPassword = user;
     isNormalUser = true;

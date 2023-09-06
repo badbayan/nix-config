@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   dns = "duckdns";
   domain = "badbayan.duckdns.org";

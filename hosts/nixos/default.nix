@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, inputs, ... }:
 
 {
   roles.gnome.enable = true;

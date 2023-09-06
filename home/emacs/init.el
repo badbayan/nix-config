@@ -278,6 +278,7 @@
   (go-mode . eglot-ensure)
   (go-ts-mode . eglot-ensure)
   (haskell-mode . eglot-ensure)
+  (nix-mode . eglot-ensure)
   (rust-mode . eglot-ensure)
   (rust-ts-mode . eglot-ensure)
   (zig-mode . eglot-ensure)
@@ -286,7 +287,13 @@
    eglot-autoshutdown t
    eglot-confirm-server-initiated-edits nil
    read-process-output-max (* 1024 1024))
-  (add-to-list 'completion-category-overrides '(eglot (styles flex)) t))
+  (add-to-list 'completion-category-overrides '(eglot (styles flex)) t)
+  :config
+  (setq-default
+   eglot-server-programs
+   (append
+    '(((nix-mode) . ("nil")))
+    eglot-server-programs)))
 
 (use-package envrc
   :config (envrc-global-mode 1))

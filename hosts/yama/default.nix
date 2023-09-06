@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = with inputs.self; [
