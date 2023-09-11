@@ -184,12 +184,14 @@
          ("M-s l" . consult-line)
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines))
+  :init (setq-default xref-show-xrefs-function #'consult-xref
+                      xref-show-definitions-function #'consult-xref)
   :config (consult-customize consult-buffer :preview-key "C-."))
 
 (use-package jinx
   :hook (text-mode . jinx-mode)
   :bind ([remap ispell-word] . jinx-correct)
-  :init (setq-default jinx-languages "de_DE en_GB en_US es_ES it_IT pl_PL ru_RU"))
+  :init (setq-default jinx-languages "ru_RU en_GB en_US de_DE es_ES it_IT pl_PL"))
 
 (use-package marginalia
   :hook (icomplete-minibuffer-setup . (lambda () (setq truncate-lines t)))

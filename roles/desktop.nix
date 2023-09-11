@@ -9,17 +9,24 @@ in {
   };
 
   config = mkIf cfg.enable {
+    boot = {
+      extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
+      kernelModules = [ "ddcci_backlight" ];
+    };
+
     hardware = {
       bluetooth = {
         enable = true;
         package = pkgs.bluezFull;
       };
+      i2c.enable = true;
       pulseaudio.enable = false;
       opengl = {
         enable = true;
         driSupport = true;
         driSupport32Bit = true;
       };
+      sensor.iio.enable = true;
     };
 
     programs = {

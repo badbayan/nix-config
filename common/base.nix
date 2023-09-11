@@ -32,6 +32,7 @@ in {
       fzf
       git
       gptfdisk
+      jq
       lsof
       ncdu
       nfs-utils
@@ -41,6 +42,7 @@ in {
       nmap
       nvd
       nvi
+      pciutils
       pinentry-curses
       (procps.overrideAttrs (attrs: {
         meta.priority = pkgs.coreutils.meta.priority + 1;
