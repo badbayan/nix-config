@@ -14,7 +14,10 @@ in {
 
   programs.command-not-found.enable = false;
 
-  environment.etc."${channels}/nixpkgs".source = inputs.nixpkgs;
+  environment = {
+    etc."${channels}/nixpkgs".source = inputs.nixpkgs;
+    sessionVariables.NIXPKGS_ALLOW_UNFREE = mkDefault "1";
+  };
 
   nix = {
     # channel.enable = false;

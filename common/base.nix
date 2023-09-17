@@ -25,6 +25,7 @@ in {
       curl
       dig
       direnv
+      dua
       efibootmgr
       exfatprogs
       fd

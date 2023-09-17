@@ -7,7 +7,7 @@
 
 (setq-default
  default-frame-alist
- '((internal-border-width . 10)
+ '((internal-border-width . 4)
    (menu-bar-lines . 0)
    (tool-bar-lines . 0)
    (horizontal-scroll-bars)

@@ -7,7 +7,7 @@ with lib;
       #systemd.enable = mkDefault true;
       verbose = mkDefault false;
     };
-    kernelPackages = mkDefault pkgs.linuxPackages_latest;
+    kernelPackages = mkDefault pkgs.linuxPackages_6_1;
     kernelParams = [ "boot.shell_on_fail" "quiet" ];
     loader = {
       efi.canTouchEfiVariables = mkDefault false;

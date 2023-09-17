@@ -18,6 +18,8 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'tooltip-mode) (tooltip-mode -1))
 
+(prefer-coding-system 'utf-8)
+(set-language-environment "UTF-8")
 (setq-default
  auto-save-default nil
  backup-inhibited t
@@ -27,6 +29,7 @@
  completion-styles '(basic flex partial-completion)
  create-lockfiles nil
  custom-file (locate-user-emacs-file "custom.el")
+ default-input-method "russian-computer"
  display-line-numbers-type 't
  ediff-split-window-function 'split-window-sensibly
  ediff-window-setup-function 'ediff-setup-windows-plain
@@ -68,8 +71,6 @@
  whitespace-style '(face tabs trailing newline)
  word-wrap-by-category t)
 (load custom-file t)
-(prefer-coding-system 'utf-8)
-(set-language-environment "UTF-8")
 
 (set-face-attribute 'default nil :family "Monospace")
 (set-face-attribute 'fixed-pitch nil :family "Monospace")
@@ -87,7 +88,7 @@
 (recentf-mode 1)
 (xterm-mouse-mode 1)
 
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; (define-key icomplete-minibuffer-map (kbd "TAB") 'icomplete-force-complete)
 ;; (define-key icomplete-minibuffer-map (kbd "C-h") 'icomplete-vertical-goto-first)

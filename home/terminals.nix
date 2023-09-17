@@ -3,7 +3,7 @@ let
 
   columns = 80;
   lines = 24;
-  pad = 10;
+  pad = 4;
   term = "xterm-256color";
   fontsize = 11;
   scrollback = 10000;

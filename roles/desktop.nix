@@ -9,11 +9,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot = {
-      extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
-      kernelModules = [ "ddcci_backlight" ];
-    };
-
     hardware = {
       bluetooth = {
         enable = true;

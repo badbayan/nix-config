@@ -14,11 +14,13 @@
   };
 
   boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
     loader = {
       systemd-boot.enable = true;
       timeout = 0;
     };
     kernel.sysctl."kernel.sysrq" = 1;
+    kernelModules = [ "ddcci_backlight" "netatop" ];
     kernelPackages = pkgs.linuxPackages_6_1;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };

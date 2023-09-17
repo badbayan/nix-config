@@ -1,5 +1,5 @@
 {
-  boot.kernelModules = [ "netatop" ];
+  # boot.kernelModules = [ "netatop" ];
 
   programs.atop = {
     enable = true;
