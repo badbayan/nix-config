@@ -5,7 +5,6 @@
     pathsToLink = [
       "/libexec"
       "/share/zsh"
-      "/share/wayland-sessions"
     ];
     shells = with pkgs; [ zsh ];
   };

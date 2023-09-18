@@ -13,10 +13,12 @@ in {
 
     nixpkgs.overlays = [(self: super: {
       gnome = super.gnome.overrideScope' (gself: gsuper: {
-        # gnome-session = gsuper.gnome-session.overrideAttrs (old: {
-        #   passthru.providedSessions =
-        #     old.passthru.providedSessions ++ [ "gnome-wayland" ];
-        # });
+        gnome-session = gsuper.gnome-session.overrideAttrs {
+          passthru.providedSessions = [ "gnome" ];
+          postFixup = ''
+            rm -rf "${placeholder "sessions"}"/share/xsessions
+          '';
+        };
         nautilus = gsuper.nautilus.overrideAttrs (old: with pkgs; {
           preFixup = old.preFixup + ''
             gappsWrapperArgs+=(--prefix XDG_DATA_DIRS : "${gnome.totem}/share")
