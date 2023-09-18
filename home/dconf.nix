@@ -16,7 +16,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/interface" = {
-      #clock-show-seconds = true;
+      # clock-show-seconds = true;
       color-scheme = "prefer-dark";
       cursor-size = 24;
       cursor-theme = "Adwaita";
@@ -156,8 +156,8 @@ with lib.hm.gvariant;
     "org/gnome/shell" = {
       disable-user-extensions = false;
       disabled-extensions = [];
-      #enabled-extensions = [];
-      #favorite-apps = [];
+      # enabled-extensions = [];
+      # favorite-apps = [];
     };
     "org/gnome/shell/app-switcher" = {
       current-workspace-only = true;
@@ -171,12 +171,12 @@ with lib.hm.gvariant;
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {
-      #show-hidden = true;
+      # show-hidden = true;
       sort-directories-first = true;
     };
 
     "org/gtk/settings/file-chooser" = {
-      #show-hidden = true;
+      # show-hidden = true;
       sort-directories-first = true;
     };
   };

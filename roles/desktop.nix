@@ -46,7 +46,7 @@ in {
         at-spi2-core.enable = mkForce false;
         evolution-data-server.enable = mkForce false;
         gnome-initial-setup.enable = mkForce false;
-        #gnome-keyring.enable = mkForce false;
+        # gnome-keyring.enable = mkForce false;
         rygel.enable = mkForce false;
         tracker-miners.enable = mkForce false;
         tracker.enable = mkForce false;
@@ -86,10 +86,10 @@ in {
 
     environment = {
       sessionVariables = {
-        #FREETYPE_PROPERTIES = mkDefault ''
-        #  autofitter:no-stem-darkening=0
-        #  autofitter:darkening-parameters=500,200,1000,100,1667,100,2333,0
-        #'';
+        # FREETYPE_PROPERTIES = mkDefault ''
+        #   autofitter:no-stem-darkening=0
+        #   autofitter:darkening-parameters=500,200,1000,100,1667,100,2333,0
+        # '';
         GST_PLUGIN_SYSTEM_PATH_1_0 = makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs; [
           gst_all_1.gst-libav
           gst_all_1.gst-plugins-bad

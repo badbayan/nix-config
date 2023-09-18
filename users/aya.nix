@@ -42,7 +42,7 @@ in {
           "allowlockedremotedesktop@kamens.us"
           "BingWallpaper@ineffable-gmail.com"
           "caffeine@patapon.info"
-          #"gsconnect@andyholmes.github.io"
+          # "gsconnect@andyholmes.github.io"
           "overviewbackground@github.com.orbitcorrection"
         ];
         favorite-apps = [

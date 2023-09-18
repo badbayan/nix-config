@@ -13,10 +13,10 @@ in {
 
     nixpkgs.overlays = [(self: super: {
       gnome = super.gnome.overrideScope' (gself: gsuper: {
-        #gnome-session = gsuper.gnome-session.overrideAttrs (old: {
-        #  passthru.providedSessions =
-        #    old.passthru.providedSessions ++ [ "gnome-wayland" ];
-        #});
+        # gnome-session = gsuper.gnome-session.overrideAttrs (old: {
+        #   passthru.providedSessions =
+        #     old.passthru.providedSessions ++ [ "gnome-wayland" ];
+        # });
         nautilus = gsuper.nautilus.overrideAttrs (old: with pkgs; {
           preFixup = old.preFixup + ''
             gappsWrapperArgs+=(--prefix XDG_DATA_DIRS : "${gnome.totem}/share")
@@ -74,22 +74,22 @@ in {
         gnome-connections
         gnome-console
         gnome-photos
-        #gnome-text-editor
+        # gnome-text-editor
         gnome-tour
       ]) ++ (with pkgs.gnome; [
         baobab
-        #cheese
+        # cheese
         epiphany
         evince
         evolution-data-server
-        #geary
+        # geary
         gnome-contacts
         gnome-font-viewer
         gnome-maps
         gnome-music
         gnome-software
         rygel
-        #seahorse
+        # seahorse
         simple-scan
         totem
         yelp

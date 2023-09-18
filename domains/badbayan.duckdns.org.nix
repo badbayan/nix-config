@@ -27,25 +27,25 @@ in {
       adminCredentialsFile = config.age.secrets.miniflux.path;
     };
     nginx.enable = true;
-    #nextcloud = {
-    #  enable = true;
-    #  adminpassFile = config.age.secrets.nextcloud.path;
-    #};
-    #prosody = {
-    #  enable = true;
-    #  admins = [ "badbayan@${domain}" ];
-    #};
-    #vaultwarden.enable = true;
+    # nextcloud = {
+    #   enable = true;
+    #   adminpassFile = config.age.secrets.nextcloud.path;
+    # };
+    # prosody = {
+    #   enable = true;
+    #   admins = [ "badbayan@${domain}" ];
+    # };
+    # vaultwarden.enable = true;
   };
 
   age.secrets = with inputs.self; {
     ${dns}.file = secrets.${dns};
     miniflux.file = secrets.miniflux;
-    #nextcloud = {
-    #  file = secrets.nextcloud;
-    #  group = "nextcloud";
-    #  owner = "nextcloud";
-    #};
+    # nextcloud = {
+    #   file = secrets.nextcloud;
+    #   group = "nextcloud";
+    #   owner = "nextcloud";
+    # };
     nix-serve.file = secrets.nix-serve;
   };
 

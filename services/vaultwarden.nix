@@ -35,7 +35,7 @@ in {
       vaultwarden = {
         enable = true;
         config = {
-          #ADMIN_TOKEN = "";
+          # ADMIN_TOKEN = "";
           DATABASE_URL = "postgresql:///vaultwarden?host=/run/postgresql";
           DOMAIN = "https://bitwarden." + cfg.domain;
           INVITATIONS_ALLOWED = false;
