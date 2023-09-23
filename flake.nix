@@ -65,6 +65,7 @@
           }
           impermanence.nixosModule
           agenix.nixosModules.default
+          { nixpkgs.overlays = builtins.attrValues self.overlays; }
         ] ++ conf ++ (builtins.concatLists [
           (lsModules ./common)
           (lsModules ./roles)
@@ -76,6 +77,8 @@
       home = lsDir ./home;
       secrets = lsDir ./secrets;
       users = lsDir ./users;
+
+      overlays = builtins.mapAttrs (name: overlay: import overlay) (lsDir ./overlays);
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];

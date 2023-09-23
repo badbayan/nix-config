@@ -123,7 +123,7 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
-(use-package almost-mono-themes :defer t)
+(use-package almost-mono-themes :demand t)
 
 (use-package circadian
   :init
@@ -151,9 +151,6 @@
   :config (evil-collection-init))
 (use-package evil-easymotion :after evil
   :config (evilem-default-keybindings "SPC"))
-
-(use-package form-feed
-  :config (global-form-feed-mode 1))
 
 (use-package minions
   :hook (after-init . minions-mode)
@@ -192,7 +189,8 @@
 (use-package jinx
   :hook (text-mode . jinx-mode)
   :bind ([remap ispell-word] . jinx-correct)
-  :init (setq-default jinx-languages "ru_RU en_GB en_US de_DE es_ES it_IT pl_PL"))
+  :init (setq-default jinx-languages "ru_RU en_GB en_US de_DE es_ES it_IT pl_PL")
+  :config (add-to-list 'jinx-exclude-regexps '(t "[[:blank:]]*-[[:blank:]]*")))
 
 (use-package marginalia
   :hook (icomplete-minibuffer-setup . (lambda () (setq truncate-lines t)))

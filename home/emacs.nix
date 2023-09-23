@@ -2,7 +2,7 @@
 let
   disabled = import ./disabledapp.nix;
   emacs = pkgs.emacs29-pgtk.override {
-    withNativeCompilation = false;
+    withNativeCompilation = true;
     withTreeSitter = true;
   };
 in {
@@ -22,7 +22,6 @@ in {
       evil
       evil-collection
       evil-easymotion
-      form-feed
       haskell-mode
       jinx
       magit
