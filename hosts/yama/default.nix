@@ -25,6 +25,30 @@
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 
+  environment.persistence."/system/persist" = {
+    directories = [
+      "/etc/ssh"
+      "/var"
+    ];
+    files = [
+      "/etc/machine-id"
+    ];
+  };
+
+  fileSystems = {
+    "/".options = [ "size=1G" "mode=755" ];
+    "/etc/ssh" = {
+      depends = [ "/system" ];
+      neededForBoot = true;
+    };
+    "/home".options = [ "compress=zstd" ];
+    "/nix".options = [ "compress=zstd" "noatime" ];
+    "/system" = {
+      neededForBoot = true;
+      options = [ "compress=zstd" ];
+    };
+  };
+
   age.secrets = with inputs.self; {
     yama-wg0.file = secrets.yama-wg0;
     yama-wg0-oneplus.file = secrets.yama-wg0-oneplus;
@@ -88,6 +112,10 @@
 
   services = {
     archisteamfarm.enable = true;
+    btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/system" ];
+    };
     dnsmasq.enable = true;
     minidlna = {
       enable = true;
