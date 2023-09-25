@@ -120,8 +120,8 @@
     minidlna = {
       enable = true;
       settings.media_dir = [
-        "A,/home/aya/Music"
-        "V,/home/aya/Videos"
+        # "A,/system/data/music"
+        "V,/system/data/videos"
       ];
     };
     openssh.enable = true;

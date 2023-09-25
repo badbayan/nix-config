@@ -7,7 +7,6 @@ in {
   users.users.${user} = {
     description = username;
     extraGroups = [ "wheel" "audio" "video" "kvm" "libvirtd" "networkmanager" "adbusers" ];
-    homeMode = "711";
     initialPassword = user;
     isNormalUser = true;
   };

@@ -3,9 +3,9 @@ let
   dns = "duckdns";
   domain = "badbayan.duckdns.org";
   email = "badya65@gmail.com";
-  homepage.root = "/home/aya/org/homepage";
+  homepage.root = "/system/data/homepage";
   public = {
-    alias = "/home/aya/Public/";
+    alias = "/system/data/pub/";
     extraConfig = ''
       fancyindex on;
       fancyindex_exact_size on;
@@ -64,8 +64,6 @@ in {
     extraDomainNames = [ domain ];
     group = config.security.acme.defaults.group;
   };
-
-  systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
 
   services.nginx.virtualHosts = {
     ${domain} = {
