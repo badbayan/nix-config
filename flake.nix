@@ -78,7 +78,9 @@
       secrets = lsDir ./secrets;
       users = lsDir ./users;
 
-      overlays = builtins.mapAttrs (name: overlay: import overlay) (lsDir ./overlays);
+      overlays = builtins.mapAttrs (_: overlay: import overlay) (lsDir ./overlays);
+
+      # hydraJobs = builtins.mapAttrs (_: host: host.config.system.build.toplevel) self.nixosConfigurations;
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];

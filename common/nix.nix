@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ config, lib, inputs, ... }:
 with lib;
 let
   channels = "nix/channels";
@@ -32,9 +32,9 @@ in {
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = mkBefore [
-        "https://nix.badbayan.duckdns.org/"
-      ];
+      substituters = mkIf (!config.services.nix-serve.enable) (mkBefore [
+        "https://nix.badbayan.duckdns.org/?priority=50"
+      ]);
       trusted-public-keys = mkBefore [
         "nix.badbayan.duckdns.org-1:qI75l0GHxICLk1ftwwL1rPqcml+krIzOtZdrRs9Zrlk="
       ];
