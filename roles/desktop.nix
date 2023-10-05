@@ -61,15 +61,7 @@ in {
         };
         pulse.enable = true;
       };
-      xserver = {
-        autoRepeatDelay = 300;
-        autoRepeatInterval = 20;
-        layout = "us,ru";
-        xkbOptions = "ctrl:nocaps,grp:alts_toggle,grp_led:caps,misc:typo,srvrkeys:none";
-        xkbVariant = "";
-        libinput.enable = true;
-        excludePackages = with pkgs; [ xterm ];
-      };
+      xserver.excludePackages = with pkgs; [ xterm ];
     };
 
     xdg = {

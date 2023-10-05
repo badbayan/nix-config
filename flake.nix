@@ -80,10 +80,14 @@
 
       overlays = builtins.mapAttrs (_: overlay: import overlay) (lsDir ./overlays);
 
-      # hydraJobs = builtins.mapAttrs (_: host: host.config.system.build.toplevel) self.nixosConfigurations;
+      hydraJobs = builtins.mapAttrs (_: host: host.config.system.build.toplevel) self.nixosConfigurations;
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];
+        nixos-gnome = mkSystem "x86_64-linux" [
+          ./hosts/nixos
+          { roles.gnome.enable = true; }
+        ];
         makai = mkSystem "x86_64-linux" [
           nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge
           nixos-hardware.nixosModules.common-pc-laptop-hdd

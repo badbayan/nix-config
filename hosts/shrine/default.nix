@@ -9,6 +9,11 @@
 
   roles.gnome.enable = true;
 
+  documentation.doc.enable = false;
+  documentation.man.enable = false;
+  documentation.man.generateCaches = false;
+  documentation.nixos.enable = false;
+
   boot = {
     loader.systemd-boot.enable = true;
     extraModprobeConfig = "options iwlwifi disable_11ax=true";

@@ -1,22 +1,31 @@
-{ config, inputs, ... }:
+{ config, lib, inputs, ... }:
 
 {
-  roles.gnome.enable = true;
-
   documentation.doc.enable = false;
+  documentation.nixos.enable = false;
+
+  boot.loader.grub.enable = false;
+
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "size=1G" "mode=755" ];
+  };
 
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.users.nixos = {
     extraGroups = [ "wheel" "audio" "video" "networkmanager" ];
-    initialPassword = "nixos";
+    initialHashedPassword = "";
     isNormalUser = true;
   };
 
-  home-manager.users.nixos = {
+  home-manager.users.nixos = lib.mkIf config.roles.gnome.enable {
     imports = with inputs.self.home; [
       chromium
       dconf
