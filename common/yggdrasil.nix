@@ -4,9 +4,10 @@ with lib;
   services.yggdrasil = {
     persistentKeys = mkDefault true;
     settings.Peers = mkDefault [
-      "tcp://itcom.multed.com:7991"
-      "tcp://srv.itrus.su:7991"
-      "tls://avevad.com:1337"
+      "tls://s-ovb-0.sergeysedoy97.ru:65535"
+      "tls://s-ovb-1.sergeysedoy97.ru:65535"
+      "tls://srv.itrus.su:7992"
+      "tls://ekb.itrus.su:7992"
     ];
   };
 }

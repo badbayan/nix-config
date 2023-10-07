@@ -6,6 +6,7 @@ with lib;
     resolveLocalQueries = mkDefault true;
     settings = {
       all-servers = mkDefault true;
+      bind-dynamic = mkDefault true;
       bogus-priv = mkDefault true;
       cache-size = mkDefault 1500;
       domain-needed = mkDefault true;
