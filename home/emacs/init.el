@@ -61,6 +61,7 @@
  tab-line-exclude-modes nil
  tab-line-new-button-show nil
  tab-width 4
+ treesit-font-lock-level 2
  truncate-partial-width-windows 32
  use-dialog-box nil
  use-file-dialog nil
