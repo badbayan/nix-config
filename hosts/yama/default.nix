@@ -106,7 +106,7 @@
     legendary-gl
     mednafen
     mednaffe
-    wineWowPackages.waylandFull
+    wineWowPackages.wayland
     winetricks
   ];
 
