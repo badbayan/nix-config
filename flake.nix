@@ -39,6 +39,7 @@
     , agenix
     , ... }: let
       specialArgs = { inherit inputs; };
+      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       lsDir = dir:
         builtins.removeAttrs (builtins.listToAttrs (builtins.concatLists (builtins.attrValues
           (builtins.mapAttrs (name: type:
@@ -81,6 +82,17 @@
       overlays = builtins.mapAttrs (_: overlay: import overlay) (lsDir ./overlays);
 
       hydraJobs = builtins.mapAttrs (_: host: host.config.system.build.toplevel) self.nixosConfigurations;
+
+      devShells = forAllSystems (system:
+        with import nixpkgs { inherit system; }; {
+          default = mkShell {
+            nativeBuildInputs = with pkgs; [
+              deadnix
+              statix
+              agenix.packages.${system}.agenix
+            ];
+          };
+        });
 
       nixosConfigurations = {
         nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];

@@ -25,8 +25,8 @@ in {
       binutils
       cifs-utils
       curl
-      dig
       direnv
+      dnsutils
       dua
       efibootmgr
       exfatprogs
