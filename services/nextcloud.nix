@@ -37,7 +37,7 @@ in {
         database.createLocally = true;
         config = {
           dbtype = "pgsql";
-          adminpassFile = cfg.adminpassFile;
+          inherit (cfg) adminpassFile;
         };
       };
 

@@ -40,7 +40,7 @@ in {
     fonts.fontconfig.enable = false;
 
     home = {
-      stateVersion = config.system.stateVersion;
+      inherit (config.system) stateVersion;
 
       packages = with pkgs; [
         telegram-desktop

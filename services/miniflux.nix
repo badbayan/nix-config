@@ -46,7 +46,7 @@ in {
 
       miniflux = {
         enable = true;
-        adminCredentialsFile = cfg.adminCredentialsFile;
+        inherit (cfg) adminCredentialsFile;
         config = {
           LISTEN_ADDR = "/run/miniflux/miniflux.sock";
           RUN_MIGRATIONS = "1";

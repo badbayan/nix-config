@@ -46,8 +46,8 @@ in {
         };
         window = {
           dimensions = {
-            columns = columns;
-            lines = lines;
+            inherit columns;
+            inherit lines;
           };
           padding = {
             x = pad;
@@ -89,7 +89,7 @@ in {
       enable = true;
       settings = {
         main = {
-          term = term;
+          inherit term;
           font = "monospace:size=" + toString fontsize;
           dpi-aware = "no";
           pad = toString pad + "x" + toString pad;
@@ -111,8 +111,8 @@ in {
           scrollback-end = "Shift+End Shift+KP_End";
         };
         colors = {
-          background = colors.background;
-          foreground = colors.foreground;
+          inherit (colors) background;
+          inherit (colors) foreground;
           regular0 = colors.normal.black;
           regular1 = colors.normal.red;
           regular2 = colors.normal.green;

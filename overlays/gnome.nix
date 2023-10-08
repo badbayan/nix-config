@@ -1,5 +1,5 @@
-self: super: rec {
-  gnome = super.gnome.overrideScope' (gself: gsuper: {
+_: super: rec {
+  gnome = super.gnome.overrideScope' (_: gsuper: {
     gnome-session = gsuper.gnome-session.overrideAttrs {
       passthru.providedSessions = [ "gnome" ];
       postFixup = ''

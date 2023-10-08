@@ -24,12 +24,12 @@ in {
 
     services.prosody = {
       enable = true;
-      admins = cfg.admins;
+      inherit (cfg) admins;
       ssl.cert = config.security.acme.certs.${cfg.domain}.directory + "/fullchain.pem";
       ssl.key = config.security.acme.certs.${cfg.domain}.directory + "/key.pem";
       virtualHosts."${cfg.domain}" = {
         enabled = true;
-        domain = cfg.domain;
+        inherit (cfg) domain;
         ssl.cert = config.services.prosody.ssl.cert;
         ssl.key = config.services.prosody.ssl.key;
       };

@@ -47,9 +47,9 @@ in {
       nvi
       pciutils
       pinentry-curses
-      (procps.overrideAttrs (attrs: {
+      (procps.overrideAttrs {
         meta.priority = pkgs.coreutils.meta.priority + 1;
-      }))
+      })
       pwgen
       ripgrep
       translate-shell

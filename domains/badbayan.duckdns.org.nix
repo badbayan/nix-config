@@ -21,7 +21,7 @@ let
   };
 in {
   roles.server = {
-    domain = domain;
+    inherit domain;
     miniflux = {
       enable = true;
       adminCredentialsFile = config.age.secrets.miniflux.path;
@@ -60,9 +60,9 @@ in {
     domain = "*." + domain;
     dnsPropagationCheck = true;
     dnsProvider = dns;
-    email = email;
+    inherit email;
     extraDomainNames = [ domain ];
-    group = config.security.acme.defaults.group;
+    inherit (config.security.acme.defaults) group;
   };
 
   services.nginx.virtualHosts = {
@@ -91,7 +91,7 @@ in {
     };
 
     ${ygg.domain} = {
-      listen = ygg.listen;
+      inherit (ygg) listen;
       serverName = ygg.domain;
       addSSL = false;
       locations."/" = homepage;

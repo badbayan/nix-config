@@ -41,8 +41,8 @@
       specialArgs = { inherit inputs; };
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       lsDir = dir:
-        builtins.removeAttrs (builtins.listToAttrs (builtins.concatLists (builtins.attrValues
-          (builtins.mapAttrs (name: type:
+        builtins.removeAttrs (builtins.listToAttrs (builtins.concatLists
+          (builtins.attrValues (builtins.mapAttrs (name: type:
             if type == "regular" then [{
               name = builtins.elemAt (builtins.match "(.*)\\..*" name) 0;
               value = dir + "/${name}";
@@ -79,9 +79,10 @@
       secrets = lsDir ./secrets;
       users = lsDir ./users;
 
-      overlays = builtins.mapAttrs (_: overlay: import overlay) (lsDir ./overlays);
+      overlays = builtins.mapAttrs (_: import) (lsDir ./overlays);
 
-      hydraJobs = builtins.mapAttrs (_: host: host.config.system.build.toplevel) self.nixosConfigurations;
+      hydraJobs = builtins.mapAttrs (_: host:
+        host.config.system.build.toplevel) self.nixosConfigurations;
 
       devShells = forAllSystems (system:
         with import nixpkgs { inherit system; }; {
