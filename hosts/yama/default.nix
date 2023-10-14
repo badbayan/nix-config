@@ -100,15 +100,17 @@
 
   environment.systemPackages = with pkgs; [
     crawlTiles
-    deluge
     easyeffects
     gzdoom
     legendary-gl
     mednafen
     mednaffe
-    wineWowPackages.wayland
+    transmission-remote-gtk
+    wineWowPackages.waylandFull
     winetricks
   ];
+
+  systemd.services.transmission.serviceConfig.BindPaths = [ "/system/data" ];
 
   services = {
     archisteamfarm.enable = true;
@@ -126,6 +128,23 @@
     };
     openssh.enable = true;
     postgresql.package = pkgs.postgresql_15;
+    transmission = {
+      enable = true;
+      group = "users";
+      home = config.users.users.aya.home;
+      openPeerPorts = true;
+      settings = {
+        alt-speed-down = 2500;
+        alt-speed-up = 2500;
+        incomplete-dir = config.services.transmission.settings.download-dir;
+        incomplete-dir-enabled = false;
+        peer-limit-global = 500;
+        peer-limit-per-torrent = 100;
+        umask = 18;
+        watch-dir = config.services.transmission.settings.download-dir;
+      };
+      user = "aya";
+    };
     yggdrasil = {
       enable = true;
       configFile = config.age.secrets.yggdrasil.path;
