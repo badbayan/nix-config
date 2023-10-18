@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 {
   imports = with inputs.self; [
@@ -8,6 +8,8 @@
   ];
 
   roles.gnome.enable = true;
+
+  nix.gc.automatic = lib.mkForce false;
 
   boot = {
     loader = {
@@ -53,10 +55,10 @@
   };
 
   services = {
-    btrfs.autoScrub = {
-      enable = true;
-      fileSystems = [ "/system" ];
-    };
+    # btrfs.autoScrub = {
+    #   enable = true;
+    #   fileSystems = [ "/system" ];
+    # };
     dnsmasq.enable = true;
     yggdrasil.enable = true;
   };

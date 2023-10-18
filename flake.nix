@@ -95,12 +95,25 @@
           };
         });
 
-      nixosConfigurations = {
-        nixos = mkSystem "x86_64-linux" [ ./hosts/nixos ];
-        nixos-gnome = mkSystem "x86_64-linux" [
+      packages.x86_64-linux = {
+        iso = (mkSystem "x86_64-linux" [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ./hosts/nixos
+        ]).config.system.build.isoImage;
+        iso-gnome = (mkSystem "x86_64-linux" [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+          ./hosts/nixos {
+            isoImage.edition = "gnome";
+            roles.gnome.enable = true;
+          }
+        ]).config.system.build.isoImage;
+        inherit ((mkSystem "x86_64-linux" [
           ./hosts/nixos
           { roles.gnome.enable = true; }
-        ];
+        ]).config.system.build) vm;
+      };
+
+      nixosConfigurations = {
         makai = mkSystem "x86_64-linux" [
           nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge
           nixos-hardware.nixosModules.common-pc-laptop-hdd

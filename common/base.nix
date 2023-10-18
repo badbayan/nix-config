@@ -8,6 +8,8 @@ in {
 
   documentation.man.generateCaches = mkDefault true;
 
+  services.getty.helpLine = lib.mkForce "";
+
   environment = {
     localBinInPath = mkDefault true;
 

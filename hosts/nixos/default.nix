@@ -4,17 +4,10 @@
   documentation.doc.enable = false;
   documentation.nixos.enable = false;
 
-  boot.loader.grub.enable = false;
-
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "size=1G" "mode=755" ];
-  };
-
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
+    wireless.enable = false;
   };
 
   security.sudo.wheelNeedsPassword = false;

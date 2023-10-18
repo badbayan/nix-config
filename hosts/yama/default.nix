@@ -131,7 +131,7 @@
     transmission = {
       enable = true;
       group = "users";
-      home = config.users.users.aya.home;
+      inherit (config.users.users.aya) home;
       openPeerPorts = true;
       settings = {
         alt-speed-down = 2500;
