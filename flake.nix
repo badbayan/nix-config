@@ -108,8 +108,15 @@
           }
         ]).config.system.build.isoImage;
         inherit ((mkSystem "x86_64-linux" [
-          ./hosts/nixos
-          { roles.gnome.enable = true; }
+          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+          ./hosts/nixos {
+            virtualisation = {
+              cores = 2;
+              memorySize = 4096;
+              qemu.options = [ "-vga virtio" ];
+            };
+            roles.gnome.enable = true;
+          }
         ]).config.system.build) vm;
       };
 
