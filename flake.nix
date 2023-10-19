@@ -98,12 +98,17 @@
       packages.x86_64-linux = {
         iso = (mkSystem "x86_64-linux" [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./hosts/nixos
+          ./hosts/nixos {
+            isoImage.squashfsCompression = "zstd -Xcompression-level 3";
+          }
         ]).config.system.build.isoImage;
         iso-gnome = (mkSystem "x86_64-linux" [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
           ./hosts/nixos {
-            isoImage.edition = "gnome";
+            isoImage = {
+              edition = "gnome";
+              squashfsCompression = "zstd -Xcompression-level 3";
+            };
             roles.gnome.enable = true;
           }
         ]).config.system.build.isoImage;
