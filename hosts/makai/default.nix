@@ -36,7 +36,7 @@
   };
 
   fileSystems = {
-    "/".options = [ "size=1G" "mode=755" ];
+    "/".options = [ "size=256M" "mode=755" ];
     "/home".options = [ "compress=zstd" ];
     "/nix".options = [ "compress=zstd" "noatime" ];
     "/system" = {

@@ -28,7 +28,9 @@
   environment.persistence."/system/persist" = {
     directories = [
       "/etc/ssh"
-      "/var"
+      "/var/db/sudo"
+      "/var/lib"
+      "/var/log"
     ];
     files = [
       "/etc/machine-id"
@@ -113,7 +115,7 @@
   systemd.services.transmission.serviceConfig.BindPaths = [ "/system/data" ];
 
   services = {
-    archisteamfarm.enable = true;
+    # archisteamfarm.enable = true;
     btrfs.autoScrub = {
       enable = true;
       fileSystems = [ "/system" ];
