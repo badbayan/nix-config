@@ -136,12 +136,12 @@
       inherit (config.users.users.aya) home;
       openPeerPorts = true;
       settings = {
-        alt-speed-down = 2500;
-        alt-speed-up = 2500;
         incomplete-dir = config.services.transmission.settings.download-dir;
         incomplete-dir-enabled = false;
         peer-limit-global = 500;
         peer-limit-per-torrent = 100;
+        speed-limit-up = 3200;
+        speed-limit-up-enabled = true;
         umask = 18;
         watch-dir = config.services.transmission.settings.download-dir;
       };

@@ -19,7 +19,7 @@
       };
       timeout = 2;
     };
-    kernelPackages = pkgs.linuxPackages_5_10;
+    kernelPackages = pkgs.linuxPackages_6_1;
     kernelParams = [ "acpi_backlight=native" ];
   };
 
