@@ -9,6 +9,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    boot.plymouth.enable = true;
+
     hardware = {
       bluetooth = {
         enable = true;

@@ -12,12 +12,9 @@
   nix.gc.automatic = lib.mkForce false;
 
   boot = {
-    loader = {
-      grub = {
-        enable = true;
-        device = "/dev/sda";
-      };
-      timeout = 2;
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
     };
     kernelPackages = pkgs.linuxPackages_6_1;
     kernelParams = [ "acpi_backlight=native" ];

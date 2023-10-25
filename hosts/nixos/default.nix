@@ -4,6 +4,8 @@
   documentation.doc.enable = false;
   documentation.nixos.enable = false;
 
+  boot.plymouth.enable = lib.mkForce false;
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;

@@ -1,10 +1,10 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 {
   boot = {
     consoleLogLevel = mkDefault 0;
     initrd = {
-      # systemd.enable = mkDefault true;
+      systemd.enable = mkIf config.boot.plymouth.enable true;
       verbose = mkDefault false;
     };
     kernelPackages = mkDefault pkgs.linuxPackages_6_1;
@@ -14,7 +14,10 @@ with lib;
       systemd-boot.configurationLimit = mkDefault 100;
       timeout = mkDefault 2;
     };
-    # plymouth.enable = mkDefault true;
+    plymouth = {
+      enable = mkDefault false;
+      font = mkDefault "${pkgs.cantarell-fonts}/share/fonts/cantarell/Cantarell-VF.otf";
+    };
     tmp.useTmpfs = mkDefault true;
   };
 }

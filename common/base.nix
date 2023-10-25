@@ -10,6 +10,11 @@ in {
 
   services.getty.helpLine = lib.mkForce "";
 
+  systemd.tmpfiles.rules = [
+    "w- /sys/kernel/mm/lru_gen/enabled - - - - y"
+    "w- /sys/kernel/mm/lru_gen/min_ttl_ms - - - - 1000"
+  ];
+
   environment = {
     localBinInPath = mkDefault true;
 
