@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   email = "badya65@gmail.com";
   user = "aya";
@@ -14,27 +14,18 @@ in {
   environment.gnome.excludePackages = with pkgs; [ gnome-text-editor ];
 
   home-manager.users.${user} = {
-    imports = with inputs.self.home; [
-      chromium
-      dconf
+    imports = with inputs.self.home; (lib.optionals config.roles.desktop.enable [
       dicts
       emacs
-      git
-      gtk
-      mpv
       obs
-      terminals
-      xdg
-      xresources
-      zathura
-    ];
+    ]);
 
     programs.git = {
       userEmail = email;
       userName = username;
     };
 
-    dconf.settings = {
+    dconf.settings = lib.mkIf config.roles.gnome.enable {
       "org/gnome/shell" = {
         enabled-extensions = [
           "AlphabeticalAppGrid@stuarthayhurst"
@@ -65,16 +56,10 @@ in {
       };
     };
 
-    fonts.fontconfig.enable = false;
-
-    home = {
-      inherit (config.system) stateVersion;
-
-      packages = with pkgs; [
-        element-desktop
-        google-chrome
-        gimp
-      ];
-    };
+    home.packages = lib.mkIf config.roles.desktop.enable (with pkgs; [
+      element-desktop
+      gimp
+      google-chrome
+    ]);
   };
 }

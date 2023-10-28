@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, lib, ... }:
 
 {
   documentation.doc.enable = false;
@@ -20,20 +20,8 @@
     isNormalUser = true;
   };
 
-  home-manager.users.nixos = lib.mkIf config.roles.gnome.enable {
-    imports = with inputs.self.home; [
-      chromium
-      dconf
-      git
-      gtk
-      mpv
-      terminals
-      xdg
-      xresources
-      zathura
-    ];
-
-    dconf.settings = {
+  home-manager.users.nixos = {
+    dconf.settings = lib.mkIf config.roles.gnome.enable {
       "org/gnome/shell" = {
         enabled-extensions = [
           "AlphabeticalAppGrid@stuarthayhurst"
@@ -46,9 +34,5 @@
         ];
       };
     };
-
-    fonts.fontconfig.enable = false;
-
-    home.stateVersion = config.system.stateVersion;
   };
 }

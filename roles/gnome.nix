@@ -19,30 +19,28 @@ in {
       };
     };
 
-    services = {
-      xserver = {
+    services.xserver = {
+      enable = true;
+      desktopManager.gnome = {
         enable = true;
-        desktopManager.gnome = {
+        sessionPath = (with pkgs; [
+          adw-gtk3
+        ]) ++ (with pkgs.gnomeExtensions; [
+          allow-locked-remote-desktop
+          alphabetical-app-grid
+          arcmenu
+          bing-wallpaper-changer
+          caffeine
+          dash-to-panel
+          overview-background
+        ]);
+      };
+      displayManager = {
+        defaultSession = "gnome";
+        gdm = {
           enable = true;
-          sessionPath = (with pkgs; [
-            adw-gtk3
-          ]) ++ (with pkgs.gnomeExtensions; [
-            allow-locked-remote-desktop
-            alphabetical-app-grid
-            arcmenu
-            bing-wallpaper-changer
-            caffeine
-            dash-to-panel
-            overview-background
-          ]);
-        };
-        displayManager = {
-          defaultSession = "gnome";
-          gdm = {
-            enable = true;
-            autoSuspend = false;
-            wayland = true;
-          };
+          autoSuspend = false;
+          wayland = true;
         };
       };
     };
@@ -53,33 +51,31 @@ in {
       style = "adwaita-dark";
     };
 
-    environment = {
-      gnome.excludePackages = (with pkgs; [
-        at-spi2-atk
-        at-spi2-core
-        gnome-connections
-        gnome-console
-        gnome-photos
-        # gnome-text-editor
-        gnome-tour
-      ]) ++ (with pkgs.gnome; [
-        baobab
-        # cheese
-        epiphany
-        evince
-        evolution-data-server
-        # geary
-        gnome-contacts
-        gnome-font-viewer
-        gnome-maps
-        gnome-music
-        gnome-software
-        rygel
-        # seahorse
-        simple-scan
-        totem
-        yelp
-      ]);
-    };
+    environment.gnome.excludePackages = (with pkgs; [
+      at-spi2-atk
+      at-spi2-core
+      gnome-connections
+      gnome-console
+      gnome-photos
+      # gnome-text-editor
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      baobab
+      # cheese
+      epiphany
+      evince
+      evolution-data-server
+      # geary
+      gnome-contacts
+      gnome-font-viewer
+      gnome-maps
+      gnome-music
+      gnome-software
+      rygel
+      # seahorse
+      simple-scan
+      totem
+      yelp
+    ]);
   };
 }

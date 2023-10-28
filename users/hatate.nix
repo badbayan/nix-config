@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 let
   user = "hatate";
   username = "Taisa";
@@ -11,19 +11,7 @@ in {
   };
 
   home-manager.users.${user} = { lib, ... }: {
-    imports = with inputs.self.home; [
-      chromium
-      dconf
-      git
-      gtk
-      mpv
-      terminals
-      xdg
-      xresources
-      zathura
-    ];
-
-    dconf.settings = {
+    dconf.settings = lib.mkIf config.roles.gnome.enable {
       "org/gnome/desktop/input-sources" = {
         sources = lib.mkForce [
           (lib.hm.gvariant.mkTuple [ "xkb" "ru" ])
@@ -37,14 +25,8 @@ in {
       };
     };
 
-    fonts.fontconfig.enable = false;
-
-    home = {
-      inherit (config.system) stateVersion;
-
-      packages = with pkgs; [
-        telegram-desktop
-      ];
-    };
+    home.packages = lib.mkIf config.roles.desktop.enable (with pkgs; [
+      telegram-desktop
+    ]);
   };
 }

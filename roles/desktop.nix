@@ -128,6 +128,7 @@ in {
         polkit_gnome
         remmina
         vulkan-tools
+        waypipe
         xdg-user-dirs
         xdg-utils
         xsettingsd

@@ -55,19 +55,33 @@
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
-          nix-index-database.nixosModules.nix-index {
-            programs.nix-index-database.comma.enable = true;
-          }
-          home-manager.nixosModules.home-manager {
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          impermanence.nixosModule
+          nix-index-database.nixosModules.nix-index
+          ({ config, ... }: {
             home-manager = {
+              sharedModules = with nixpkgs.lib; with self.home;
+                mkForce (builtins.concatLists [
+                  [{
+                    fonts.fontconfig.enable = false;
+                    home.stateVersion = config.system.stateVersion;
+                  } git ]
+                  (optionals config.roles.desktop.enable [
+                    chromium mpv terminals xdg xresources zathura
+                  ])
+                  (optionals config.roles.gnome.enable [
+                    dconf gtk
+                  ])
+                ]);
               useGlobalPkgs = true;
               useUserPackages = true;
             };
-          }
-          impermanence.nixosModule
-          agenix.nixosModules.default
-          { nixpkgs.overlays = builtins.attrValues self.overlays; }
-        ] ++ conf ++ (builtins.concatLists [
+            programs.nix-index-database.comma.enable = true;
+            nixpkgs.overlays = builtins.attrValues self.overlays;
+          })
+        ] ++ (builtins.concatLists [
+          conf
           (lsModules ./common)
           (lsModules ./roles)
           (lsModules ./services)
