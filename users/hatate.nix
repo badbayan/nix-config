@@ -26,6 +26,7 @@ in {
     };
 
     home.packages = lib.mkIf config.roles.desktop.enable (with pkgs; [
+      google-chrome
       telegram-desktop
     ]);
   };

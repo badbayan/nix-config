@@ -2,6 +2,7 @@
 
 {
   documentation.doc.enable = false;
+  documentation.man.generateCaches = false;
   documentation.nixos.enable = false;
 
   boot.plymouth.enable = lib.mkForce false;

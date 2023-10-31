@@ -8,7 +8,10 @@ in {
 
   documentation.man.generateCaches = mkDefault true;
 
-  services.getty.helpLine = lib.mkForce "";
+  services = {
+    fwupd.enable = mkDefault true;
+    getty.helpLine = mkForce "";
+  };
 
   systemd.tmpfiles.rules = [
     "w- /sys/kernel/mm/lru_gen/enabled - - - - y"
