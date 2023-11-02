@@ -2,7 +2,6 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-stable";
@@ -81,9 +80,7 @@
             programs.nix-index-database.comma.enable = true;
             nixpkgs.overlays = (builtins.attrValues self.overlays) ++ [
               (_: super: {
-                master = inputs.nixpkgs-master.legacyPackages.${super.system};
                 # unstable = inputs.nixpkgs-unstable.legacyPackages.${super.system};
-                yggdrasil = super.pkgs.master.yggdrasil;
               })
             ];
           })
