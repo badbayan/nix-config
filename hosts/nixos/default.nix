@@ -20,6 +20,7 @@
     initialHashedPassword = "";
     isNormalUser = true;
   };
+  users.users.root.initialHashedPassword = "";
 
   home-manager.users.nixos = {
     dconf.settings = lib.mkIf config.roles.gnome.enable {

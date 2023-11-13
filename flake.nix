@@ -59,14 +59,19 @@
           home-manager.nixosModules.home-manager
           impermanence.nixosModule
           nix-index-database.nixosModules.nix-index
-          ({ config, ... }: {
+          ({ config, lib, ... }: {
             home-manager = {
-              sharedModules = with nixpkgs.lib; with self.home;
+              sharedModules = with lib; with self.home;
                 mkForce (builtins.concatLists [
-                  [{
+                  [({ lib, ... }: {
                     fonts.fontconfig.enable = false;
+                    home.activation.zshrc = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                      if [[ ! -e $HOME/.zshrc ]]; then
+                        $DRY_RUN_CMD touch $HOME/.zshrc
+                      fi
+                    '';
                     home.stateVersion = config.system.stateVersion;
-                  } git ]
+                  }) git ]
                   (optionals config.roles.desktop.enable [
                     chromium mpv terminals xdg xresources zathura
                   ])
@@ -136,11 +141,21 @@
             virtualisation = {
               cores = 2;
               memorySize = 4096;
+              qemu.options = [ "-nographic" ];
+            };
+          }
+        ]).config.system.build) vm;
+        vm-gnome = (mkSystem "x86_64-linux" [
+          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+          ./hosts/nixos {
+            virtualisation = {
+              cores = 2;
+              memorySize = 4096;
               qemu.options = [ "-vga virtio" ];
             };
             roles.gnome.enable = true;
           }
-        ]).config.system.build) vm;
+        ]).config.system.build.vm;
       };
 
       nixosConfigurations = {

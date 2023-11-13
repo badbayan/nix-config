@@ -33,11 +33,14 @@ in {
     systemPackages = with pkgs; [
       _7zz
       binutils
+      btrfs-progs
       cifs-utils
+      compsize
       curl
       direnv
       dnsutils
       dua
+      e2fsprogs
       efibootmgr
       exfatprogs
       fd
