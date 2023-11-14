@@ -21,6 +21,17 @@
     kernelParams = [ "acpi_backlight=native" ];
   };
 
+  hardware.firmware = with pkgs; let
+    firmware = compressFirmwareXz linux-firmware;
+    ibt-0040-1050 = runCommand "ibt-${linux-firmware.version}" {} ''
+      mkdir -p $out/lib/firmware/intel
+      cd $out/lib/firmware/intel
+      for ext in ddc sfi; do
+        ln -sf ${firmware}/lib/firmware/intel/ibt-1040-4150.$ext ibt-0040-1050.$ext
+      done
+    '';
+  in [ ibt-0040-1050 ];
+
   networking = {
     hostName = "shrine";
     networkmanager.enable = true;
