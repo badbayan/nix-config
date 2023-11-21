@@ -166,8 +166,10 @@ with lib.hm.gvariant;
       folder-order-position = "start";
     };
     "org/gnome/shell/extensions/caffeine" = {
+      enable-fullscreen = false;
       show-indicator = "always";
       show-notifications = false;
+      toggle-shortcut = [ "<Super>F2" ];
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {

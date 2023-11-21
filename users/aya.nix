@@ -56,10 +56,17 @@ in {
       };
     };
 
+    home.file.".nethackrc".text = ''
+      OPTIONS=color,msg_window:full,symset:curses,time
+      OPTIONS=gender:random,!legacy,number_pad:1
+      OPTIONS=pickup_burden:unencumbered,pickup_types:$?!/="+
+    '';
+
     home.packages = lib.mkIf (config.roles.desktop != null) (with pkgs; [
       element-desktop
       gimp
       google-chrome
+      nethack
     ]);
   };
 }
