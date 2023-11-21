@@ -11,28 +11,28 @@ in {
     isNormalUser = true;
   };
 
+  documentation.man.generateCaches = true;
   environment.gnome.excludePackages = with pkgs; [ gnome-text-editor ];
 
   home-manager.users.${user} = {
-    imports = with inputs.self.home; (lib.optionals config.roles.desktop.enable [
+    imports = with inputs.self.home; lib.optionals (config.roles.desktop != null) [
       dicts
       emacs
       obs
-    ]);
+    ];
 
     programs.git = {
       userEmail = email;
       userName = username;
     };
 
-    dconf.settings = lib.mkIf config.roles.gnome.enable {
+    dconf.settings = lib.mkIf (config.roles.desktop == "gnome") {
       "org/gnome/shell" = {
         enabled-extensions = [
           "AlphabeticalAppGrid@stuarthayhurst"
           "allowlockedremotedesktop@kamens.us"
           "BingWallpaper@ineffable-gmail.com"
           "caffeine@patapon.info"
-          # "gsconnect@andyholmes.github.io"
           "overviewbackground@github.com.orbitcorrection"
         ];
         favorite-apps = [
@@ -56,7 +56,7 @@ in {
       };
     };
 
-    home.packages = lib.mkIf config.roles.desktop.enable (with pkgs; [
+    home.packages = lib.mkIf (config.roles.desktop != null) (with pkgs; [
       element-desktop
       gimp
       google-chrome

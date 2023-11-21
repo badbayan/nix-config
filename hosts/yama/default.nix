@@ -9,7 +9,7 @@
   ];
 
   roles = {
-    gnome.enable = true;
+    desktop = "gnome";
     virt.enable = true;
   };
 

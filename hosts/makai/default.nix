@@ -7,7 +7,7 @@
     users.aya
   ];
 
-  roles.gnome.enable = true;
+  roles.desktop = "gnome";
 
   nix.gc.automatic = lib.mkForce false;
 

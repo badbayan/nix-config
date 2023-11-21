@@ -6,8 +6,6 @@ in {
   i18n.defaultLocale = mkDefault "ru_RU.UTF-8";
   time.timeZone = mkDefault "Asia/Novosibirsk";
 
-  documentation.man.generateCaches = mkDefault true;
-
   services = {
     fwupd.enable = mkDefault true;
     getty.helpLine = mkForce "";

@@ -7,11 +7,10 @@
     users.hatate
   ];
 
-  roles.gnome.enable = true;
+  roles.desktop = "gnome";
 
   documentation.doc.enable = false;
   documentation.man.enable = false;
-  documentation.man.generateCaches = false;
   documentation.nixos.enable = false;
 
   boot = {

@@ -3,12 +3,14 @@ with lib;
 let
   cfg = config.roles.desktop;
 in {
-  options.roles.desktop.enable = mkOption {
-    default = false;
-    type = types.bool;
+  options.roles.desktop = mkOption {
+    default = null;
+    type = types.nullOr (types.enum [
+      "gnome" "kde"
+    ]);
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg != null) {
     boot.plymouth.enable = true;
 
     hardware = {
@@ -17,7 +19,7 @@ in {
         package = pkgs.bluezFull;
       };
       i2c.enable = true;
-      pulseaudio.enable = false;
+      pulseaudio.enable = mkForce false;
       opengl = {
         enable = true;
         driSupport = true;
@@ -63,7 +65,10 @@ in {
         };
         pulse.enable = true;
       };
-      xserver.excludePackages = with pkgs; [ xterm ];
+      xserver = {
+        enable = true;
+        excludePackages = with pkgs; [ xterm ];
+      };
     };
 
     xdg = {

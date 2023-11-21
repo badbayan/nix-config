@@ -2,7 +2,6 @@
 
 {
   documentation.doc.enable = false;
-  documentation.man.generateCaches = false;
   documentation.nixos.enable = false;
 
   boot.plymouth.enable = lib.mkForce false;
@@ -23,7 +22,7 @@
   users.users.root.initialHashedPassword = "";
 
   home-manager.users.nixos = {
-    dconf.settings = lib.mkIf config.roles.gnome.enable {
+    dconf.settings = lib.mkIf (config.roles.desktop == "gnome") {
       "org/gnome/shell" = {
         enabled-extensions = [
           "AlphabeticalAppGrid@stuarthayhurst"

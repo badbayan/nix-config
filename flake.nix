@@ -57,7 +57,7 @@
         modules = [
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
-          impermanence.nixosModule
+          impermanence.nixosModules.impermanence
           nix-index-database.nixosModules.nix-index
           ({ config, lib, ... }: {
             home-manager = {
@@ -72,10 +72,10 @@
                     '';
                     home.stateVersion = config.system.stateVersion;
                   }) git ]
-                  (optionals config.roles.desktop.enable [
+                  (optionals (config.roles.desktop != null) [
                     chromium mpv terminals xdg xresources zathura
                   ])
-                  (optionals config.roles.gnome.enable [
+                  (optionals (config.roles.desktop == "gnome") [
                     dconf gtk
                   ])
                 ]);
@@ -132,7 +132,7 @@
               edition = "gnome";
               squashfsCompression = "zstd -Xcompression-level 3";
             };
-            roles.gnome.enable = true;
+            roles.desktop = "gnome";
           }
         ]).config.system.build.isoImage;
         inherit ((mkSystem "x86_64-linux" [
@@ -153,7 +153,7 @@
               memorySize = 4096;
               qemu.options = [ "-vga virtio" ];
             };
-            roles.gnome.enable = true;
+            roles.desktop = "gnome";
           }
         ]).config.system.build.vm;
       };

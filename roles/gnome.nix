@@ -1,26 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.roles.gnome;
-in {
-  options.roles.gnome.enable = mkOption {
-    default = false;
-    type = types.bool;
-  };
-
-  config = mkIf cfg.enable {
-    roles.desktop.enable = mkForce true;
-
-    programs = {
-      gnupg.agent.pinentryFlavor = "gnome3";
-      kdeconnect = {
-        enable = true;
-        package = pkgs.gnomeExtensions.gsconnect;
-      };
-    };
+{
+  config = mkIf (config.roles.desktop == "gnome") {
+    programs.gnupg.agent.pinentryFlavor = "gnome3";
 
     services.xserver = {
-      enable = true;
       desktopManager.gnome = {
         enable = true;
         sessionPath = (with pkgs; [

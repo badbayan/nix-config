@@ -11,7 +11,7 @@ in {
   };
 
   home-manager.users.${user} = { lib, ... }: {
-    dconf.settings = lib.mkIf config.roles.gnome.enable {
+    dconf.settings = lib.mkIf (config.roles.desktop == "gnome") {
       "org/gnome/desktop/input-sources" = {
         sources = lib.mkForce [
           (lib.hm.gvariant.mkTuple [ "xkb" "ru" ])
@@ -25,7 +25,7 @@ in {
       };
     };
 
-    home.packages = lib.mkIf config.roles.desktop.enable (with pkgs; [
+    home.packages = lib.mkIf (config.roles.desktop != null) (with pkgs; [
       google-chrome
       telegram-desktop
     ]);
