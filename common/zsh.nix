@@ -27,6 +27,10 @@
       WORDCHARS+=$'|'
       ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
       PS1=$'%B%F{%(!.red.green)}%n@%m%f:%F{yellow}%~%f %2(L.^%L.)%#%b '
+      precmd() {
+          print -Pn '\e]133;A\e\\'
+          print -Pn '\e]0;%n@%m: %~%2(L. ^%L.)\a'
+      }
       stty -ixon -ixoff
       bindkey -e
       bindkey "''${terminfo[kbs]:-^?}"        backward-delete-char

@@ -2,8 +2,6 @@
 with lib;
 {
   config = mkIf (config.roles.desktop == "gnome") {
-    programs.gnupg.agent.pinentryFlavor = "gnome3";
-
     services.xserver = {
       desktopManager.gnome = {
         enable = true;
@@ -41,22 +39,18 @@ with lib;
       gnome-connections
       gnome-console
       gnome-photos
-      # gnome-text-editor
       gnome-tour
     ]) ++ (with pkgs.gnome; [
       baobab
-      # cheese
       epiphany
       evince
       evolution-data-server
-      # geary
       gnome-contacts
       gnome-font-viewer
       gnome-maps
       gnome-music
       gnome-software
       rygel
-      # seahorse
       simple-scan
       totem
       yelp

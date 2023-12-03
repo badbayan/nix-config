@@ -56,6 +56,7 @@ in {
       nmap
       nvd
       nvi
+      nvme-cli
       pciutils
       pinentry-curses
       (procps.overrideAttrs {
@@ -63,6 +64,7 @@ in {
       })
       pwgen
       ripgrep
+      smartmontools
       translate-shell
       unrar
       unzip

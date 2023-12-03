@@ -3,7 +3,7 @@ with lib;
 let
   channels = "nix/channels";
 in {
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   nixpkgs.config.allowUnfree = mkDefault true;
 

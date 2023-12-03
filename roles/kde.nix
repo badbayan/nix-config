@@ -2,8 +2,6 @@
 with lib;
 {
   config = mkIf (config.roles.desktop == "kde") {
-    programs.gnupg.agent.pinentryFlavor = "qt";
-
     boot.plymouth.theme = "breeze";
 
     services.xserver = {
@@ -12,6 +10,12 @@ with lib;
         defaultSession = "plasmawayland";
         sddm.enable = true;
       };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme = "kde";
+      style = "breeze";
     };
   };
 }

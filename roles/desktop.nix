@@ -14,10 +14,7 @@ in {
     boot.plymouth.enable = true;
 
     hardware = {
-      bluetooth = {
-        enable = true;
-        package = pkgs.bluezFull;
-      };
+      bluetooth.enable = true;
       i2c.enable = true;
       pulseaudio.enable = mkForce false;
       opengl = {
@@ -110,7 +107,6 @@ in {
         glib
         gnome.adwaita-icon-theme
         gnome.dconf-editor
-        gnome.gnome-disk-utility
         gsettings-desktop-schemas
         helvum
         imv
@@ -150,9 +146,9 @@ in {
     };
 
     fonts = {
-      enableDefaultFonts = true;
+      enableDefaultPackages = true;
       fontDir.enable = true;
-      fonts = with pkgs; [
+      packages = with pkgs; [
         (iosevka-bin.override {
           variant = "curly";
         })
@@ -179,7 +175,7 @@ in {
         hinting = {
           enable = true;
           autohint = false;
-          style = "hintslight";
+          style = "slight";
         };
         subpixel = {
           lcdfilter = "none";

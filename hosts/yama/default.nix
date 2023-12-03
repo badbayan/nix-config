@@ -101,9 +101,12 @@
   programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
+    audacity
     crawlTiles
+    eartag
     easyeffects
     gzdoom
+    infra-arcana
     legendary-gl
     mednafen
     mednaffe

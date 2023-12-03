@@ -51,7 +51,7 @@ in {
 
   services.nix-serve = {
     enable = true;
-    package = pkgs.nix-serve-ng;
+    package = pkgs.nix-serve;
     secretKeyFile = config.age.secrets.nix-serve.path;
   };
 
