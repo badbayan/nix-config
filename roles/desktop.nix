@@ -146,19 +146,22 @@ in {
     };
 
     fonts = {
-      enableDefaultPackages = true;
+      enableDefaultPackages = mkForce false;
       fontDir.enable = true;
       packages = with pkgs; [
+        dejavu_fonts
         (iosevka-bin.override {
           variant = "curly";
         })
+        freefont_ttf
+        # gyre-fonts
         liberation_ttf
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
-        noto-fonts-emoji
-        noto-fonts-extra
+        noto-fonts-color-emoji
         open-sans
+        unifont
         vollkorn
       ];
       fontconfig = {
@@ -168,9 +171,10 @@ in {
         cache32Bit = true;
         includeUserConf = true;
         defaultFonts = {
-          monospace = [ "Iosevka Term Curly" ];
-          sansSerif = [ "Open Sans" "Noto Sans" ];
-          serif = [ "Vollkorn" "Noto Serif" ];
+          emoji = mkOverride 80 [ "Noto Color Emoji" ];
+          monospace = mkOverride 80 [ "Iosevka Term Curly" ];
+          sansSerif = mkOverride 80 [ "Open Sans" "Noto Sans" ];
+          serif = mkOverride 80 [ "Vollkorn" "Noto Serif" ];
         };
         hinting = {
           enable = true;

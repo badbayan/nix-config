@@ -4,10 +4,10 @@
   imports = with inputs.self; [
     ./hardware-configuration.nix
 
-    users.hatate
+    users.taisa
   ];
 
-  roles.desktop = "gnome";
+  roles.desktop = "kde";
 
   documentation.doc.enable = false;
   documentation.man.enable = false;

@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  user = "hatate";
+  user = "taisa";
   username = "Taisa";
 in {
   users.users.${user} = {

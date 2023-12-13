@@ -11,7 +11,7 @@ with lib;
     autoRepeatDelay = mkDefault 300;
     autoRepeatInterval = mkDefault 20;
     layout = mkDefault "us,ru";
-    xkbOptions = mkDefault "ctrl:nocaps,grp:alts_toggle,grp_led:caps,misc:typo,srvrkeys:none";
+    xkbOptions = mkDefault "ctrl:nocaps,grp:win_space_toggle,grp_led:caps,lv3:ralt_switch_multikey,misc:typo,srvrkeys:none";
     xkbVariant = mkDefault "";
   };
 }
