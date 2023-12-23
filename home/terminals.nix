@@ -5,33 +5,33 @@ let
   lines = 24;
   pad = 4;
   term = "xterm-256color";
-  fontsize = 11;
+  fontsize = 12;
   scrollback = 10000;
 
   colors = {
     background = "000000";
-    foreground = "ececec";
+    foreground = "ffffff";
 
     normal = {
-      black = "2c2c2c";
+      black = "000000";
       red = "ff5454";
       green = "4aa47a";
       yellow = "dec26a";
-      blue = "6b9dff";
+      blue = "6290d6";
       magenta = "cc82e4";
       cyan = "84deed";
-      white = "bcbcbc";
+      white = "cbcbcb";
     };
 
     bright = {
-      black = "767676";
+      black = "545454";
       red = "ff7c7c";
       green = "8cc89c";
-      yellow = "d2d292";
+      yellow = "f2f292";
       blue = "86b6ff";
       magenta = "ea96ff";
       cyan = "92ffff";
-      white = "ececec";
+      white = "ffffff";
     };
   };
 in {

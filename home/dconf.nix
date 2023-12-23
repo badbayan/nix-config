@@ -26,7 +26,7 @@ with lib.hm.gvariant;
       font-name = "sans 10";
       gtk-theme = "adw-gtk3";
       icon-theme = "Papirus-Dark";
-      monospace-font-name = "monospace 11";
+      monospace-font-name = "monospace 12";
     };
 
     "org/gnome/desktop/media-handling" = {
