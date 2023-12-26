@@ -20,7 +20,7 @@
       timeout = 0;
     };
     kernel.sysctl."kernel.sysrq" = 1;
-    kernelModules = [ "ddcci_backlight" "netatop" ];
+    kernelModules = [ "ddcci_backlight" ];
     kernelPackages = pkgs.linuxPackages_6_1;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
@@ -98,7 +98,10 @@
     };
   };
 
-  programs.steam.enable = true;
+  programs = {
+    atop.netatop.enable = true;
+    steam.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     audacity
