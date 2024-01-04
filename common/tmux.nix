@@ -12,7 +12,7 @@
       set -g renumber-windows on
       set -g set-titles on
       set -g status-left ' #h #[bg=green,fg=black] #S #[default] '
-      set -g status-right ' #[bg=green,fg=black] %H:%M #[default] %a %d %b '
+      set -g status-right ' #[bg=green,fg=black] %R #[default] %a %d-%b '
       set -g status-style bg=terminal,fg=terminal
       set -g window-status-format ' #I #W #F '
       set -g window-status-style bg=brightblack,fg=white

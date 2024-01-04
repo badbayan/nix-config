@@ -118,44 +118,41 @@
           };
         });
 
-      packages.x86_64-linux = {
-        iso = (mkSystem "x86_64-linux" [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./hosts/nixos {
-            isoImage.squashfsCompression = "zstd -Xcompression-level 3";
-          }
-        ]).config.system.build.isoImage;
-        iso-gnome = (mkSystem "x86_64-linux" [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-          ./hosts/nixos {
+      packages.x86_64-linux = let
+        mkIso = edition: conf: (mkSystem "x86_64-linux" ([
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if (edition == "minimal") then "minimal" else "base"}.nix"
+          ./hosts/nixos ({ lib, pkgs, ... }: {
             isoImage = {
-              edition = "gnome";
+              inherit edition;
+              isoBaseName = "nixos-${edition}";
               squashfsCompression = "zstd -Xcompression-level 3";
             };
-            roles.desktop = "gnome";
-          }
-        ]).config.system.build.isoImage;
-        inherit ((mkSystem "x86_64-linux" [
+            environment.systemPackages = lib.mkIf
+              (edition != "minimal") (with pkgs; [ gparted ]);
+          })
+        ] ++ conf)).config.system.build.isoImage;
+        mkVm = conf: (mkSystem "x86_64-linux" ([
           "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
           ./hosts/nixos {
             virtualisation = {
               cores = 2;
               memorySize = 4096;
-              qemu.options = [ "-nographic" ];
             };
           }
-        ]).config.system.build) vm;
-        vm-gnome = (mkSystem "x86_64-linux" [
-          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-          ./hosts/nixos {
-            virtualisation = {
-              cores = 2;
-              memorySize = 4096;
-              qemu.options = [ "-vga virtio" ];
-            };
-            roles.desktop = "gnome";
-          }
-        ]).config.system.build.vm;
+        ] ++ conf)).config.system.build.vm;
+      in {
+        iso = mkIso "minimal" [];
+        iso-gnome = mkIso "gnome" [{ roles.desktop = "gnome"; }];
+        iso-kde = mkIso "plasma5" [{ roles.desktop = "kde"; }];
+        vm = mkVm [{ virtualisation.qemu.options = [ "-nographic" ]; }];
+        vm-gnome = mkVm [{
+          virtualisation.qemu.options = [ "-vga virtio" ];
+          roles.desktop = "gnome";
+        }];
+        vm-kde = mkVm [{
+          virtualisation.qemu.options = [ "-vga virtio" ];
+          roles.desktop = "kde";
+        }];
       };
 
       nixosConfigurations = {

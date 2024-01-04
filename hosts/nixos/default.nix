@@ -4,6 +4,9 @@
   documentation.doc.enable = false;
   documentation.nixos.enable = false;
 
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = null;
+
   boot.plymouth.enable = lib.mkForce false;
 
   networking = {
