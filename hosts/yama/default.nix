@@ -73,27 +73,24 @@
     firewall.allowedTCPPorts = [ 3389 ];
     firewall.allowedUDPPorts = [ 51820 ];
 
-    wireguard = {
-      enable = true;
-      interfaces = {
-        wg0 = {
-          ips = [ "10.0.0.1/24" ];
-          listenPort = 51820;
-          privateKeyFile = config.age.secrets.yama-wg0.path;
-          peers = [
-            { # OnePlus
-              publicKey = "i7tPC3P9xTMK6y6b+UU39Ez/hDd7p75iJchXXKxT/ww=";
-              presharedKeyFile = config.age.secrets.yama-wg0-oneplus.path;
-              allowedIPs = [ "10.0.0.10/32" ];
-            }
-            { # fail2banana.ru
-              publicKey = "gcP/mUmJ1t1yWU1YKq1xMF53y9+COYooURmQuRTmLXM=";
-              presharedKeyFile = config.age.secrets.yama-wg0-fail2banana.path;
-              endpoint = "37.192.91.95:51820";
-              allowedIPs = [ "10.0.0.50/32" ];
-            }
-          ];
-        };
+    wireguard.interfaces = {
+      wg0 = {
+        ips = [ "10.0.0.1/24" ];
+        listenPort = 51820;
+        privateKeyFile = config.age.secrets.yama-wg0.path;
+        peers = [
+          { # OnePlus
+            publicKey = "i7tPC3P9xTMK6y6b+UU39Ez/hDd7p75iJchXXKxT/ww=";
+            presharedKeyFile = config.age.secrets.yama-wg0-oneplus.path;
+            allowedIPs = [ "10.0.0.10/32" ];
+          }
+          { # fail2banana.ru
+            publicKey = "gcP/mUmJ1t1yWU1YKq1xMF53y9+COYooURmQuRTmLXM=";
+            presharedKeyFile = config.age.secrets.yama-wg0-fail2banana.path;
+            endpoint = "37.192.91.95:51820";
+            allowedIPs = [ "10.0.0.50/32" ];
+          }
+        ];
       };
     };
   };

@@ -118,42 +118,50 @@
           };
         });
 
-      packages.x86_64-linux = let
-        mkIso = edition: conf: (mkSystem "x86_64-linux" ([
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if (edition == "minimal") then "minimal" else "base"}.nix"
-          ./hosts/nixos ({ lib, pkgs, ... }: {
-            isoImage = {
-              inherit edition;
-              isoBaseName = "nixos-${edition}";
-              squashfsCompression = "zstd -Xcompression-level 3";
-            };
-            environment.systemPackages = lib.mkIf
-              (edition != "minimal") (with pkgs; [ gparted ]);
-          })
-        ] ++ conf)).config.system.build.isoImage;
-        mkVm = conf: (mkSystem "x86_64-linux" ([
-          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-          ./hosts/nixos {
-            virtualisation = {
-              cores = 2;
-              memorySize = 4096;
-            };
-          }
-        ] ++ conf)).config.system.build.vm;
-      in {
-        iso = mkIso "minimal" [];
-        iso-gnome = mkIso "gnome" [{ roles.desktop = "gnome"; }];
-        iso-kde = mkIso "plasma5" [{ roles.desktop = "kde"; }];
-        vm = mkVm [{ virtualisation.qemu.options = [ "-nographic" ]; }];
-        vm-gnome = mkVm [{
-          virtualisation.qemu.options = [ "-vga virtio" ];
-          roles.desktop = "gnome";
-        }];
-        vm-kde = mkVm [{
-          virtualisation.qemu.options = [ "-vga virtio" ];
-          roles.desktop = "kde";
-        }];
-      };
+      packages = nixpkgs.lib.recursiveUpdate (forAllSystems (system:
+        with import nixpkgs { inherit system; }; {
+          default = writeShellScriptBin "fmt-check" ''
+            ${deadnix}/bin/deadnix ${self}
+            ${statix}/bin/statix check -i hardware-configuration.nix -- ${self}
+          '';
+        })) {
+          x86_64-linux = let
+            mkIso = edition: conf: (mkSystem "x86_64-linux" ([
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if (edition == "minimal") then "minimal" else "base"}.nix"
+              ./hosts/nixos ({ lib, pkgs, ... }: {
+                isoImage = {
+                  inherit edition;
+                  isoBaseName = "nixos-${edition}";
+                  squashfsCompression = "zstd -Xcompression-level 3";
+                };
+                environment.systemPackages = lib.mkIf
+                  (edition != "minimal") (with pkgs; [ gparted ]);
+              })
+            ] ++ conf)).config.system.build.isoImage;
+            mkVm = conf: (mkSystem "x86_64-linux" ([
+              "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+              ./hosts/nixos {
+                virtualisation = {
+                  cores = 2;
+                  memorySize = 4096;
+                };
+              }
+            ] ++ conf)).config.system.build.vm;
+          in {
+            iso = mkIso "minimal" [];
+            iso-gnome = mkIso "gnome" [{ roles.desktop = "gnome"; }];
+            iso-kde = mkIso "plasma5" [{ roles.desktop = "kde"; }];
+            vm = mkVm [{ virtualisation.qemu.options = [ "-nographic" ]; }];
+            vm-gnome = mkVm [{
+              virtualisation.qemu.options = [ "-vga virtio" ];
+              roles.desktop = "gnome";
+            }];
+            vm-kde = mkVm [{
+              virtualisation.qemu.options = [ "-vga virtio" ];
+              roles.desktop = "kde";
+            }];
+          };
+        };
 
       nixosConfigurations = {
         makai = mkSystem "x86_64-linux" [

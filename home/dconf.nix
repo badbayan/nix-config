@@ -90,6 +90,10 @@ with lib.hm.gvariant;
       unmaximize = [ "<Super>j" "<Super>Down" ];
     };
     "org/gnome/desktop/wm/preferences" = {
+      auto-raise = false;
+      button-layout = "appmenu:close";
+      focus-mode = "click";
+      focus-new-windows = "smart";
       num-workspaces = 5;
       titlebar-font = "sans 10";
     };
