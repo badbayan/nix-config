@@ -16,7 +16,7 @@
   boot = {
     loader.systemd-boot.enable = true;
     extraModprobeConfig = "options iwlwifi disable_11ax=true";
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_6;
     kernelParams = [ "acpi_backlight=native" ];
   };
 
