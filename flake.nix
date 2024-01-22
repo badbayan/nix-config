@@ -7,8 +7,8 @@
     nixpkgs.follows = "nixpkgs-stable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
+    flake-programs-sqlite = {
+      url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -29,15 +29,8 @@
     };
   };
 
-  outputs = inputs @
-    { self
-    , nixpkgs
-    , nixos-hardware
-    , nix-index-database
-    , home-manager
-    , impermanence
-    , agenix
-    , ... }: let
+  outputs = inputs @ { self , nixpkgs , nixos-hardware , ... }:
+    let
       specialArgs = { inherit inputs; };
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       lsDir = dir:
@@ -55,10 +48,10 @@
       mkSystem = system: conf: nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
-          agenix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          impermanence.nixosModules.impermanence
-          nix-index-database.nixosModules.nix-index
+          inputs.agenix.nixosModules.default
+          inputs.flake-programs-sqlite.nixosModules.programs-sqlite
+          inputs.home-manager.nixosModules.home-manager
+          inputs.impermanence.nixosModules.impermanence
           ({ config, lib, ... }: {
             home-manager = {
               sharedModules = with lib; with self.home;
@@ -82,7 +75,6 @@
               useGlobalPkgs = true;
               useUserPackages = true;
             };
-            programs.nix-index-database.comma.enable = true;
             nixpkgs.overlays = (builtins.attrValues self.overlays) ++ [
               (_: super: {
                 # unstable = inputs.nixpkgs-unstable.legacyPackages.${super.system};

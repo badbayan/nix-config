@@ -1,8 +1,6 @@
 { config, lib, inputs, ... }:
 with lib;
-let
-  channels = "nix/channels";
-in {
+{
   system.stateVersion = "23.11";
 
   nixpkgs.config.allowUnfree = mkDefault true;
@@ -12,10 +10,7 @@ in {
     memorySize = mkDefault 4096;
   };
 
-  programs.command-not-found.enable = false;
-
   environment = {
-    etc."${channels}/nixpkgs".source = inputs.nixpkgs;
     sessionVariables.NIXPKGS_ALLOW_UNFREE = mkDefault "1";
   };
 
@@ -23,8 +18,7 @@ in {
     # channel.enable = false;
 
     nixPath = [
-      "nixpkgs=/etc/${channels}/nixpkgs"
-      "/etc/${channels}"
+      "nixpkgs=${inputs.nixpkgs}"
     ];
 
     registry.nixpkgs.flake = inputs.nixpkgs;
