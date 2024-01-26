@@ -16,7 +16,7 @@
       enable = true;
       device = "/dev/sda";
     };
-    kernelPackages = pkgs.linuxPackages_6_1;
+    kernelPackages = pkgs.linuxPackages_6_6;
     kernelParams = [ "acpi_backlight=native" ];
   };
 

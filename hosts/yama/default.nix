@@ -21,7 +21,7 @@
     };
     kernel.sysctl."kernel.sysrq" = 1;
     kernelModules = [ "ddcci_backlight" ];
-    kernelPackages = pkgs.linuxPackages_6_1;
+    kernelPackages = pkgs.linuxPackages_6_6;
     kernelParams = [ "acpi_backlight=vendor" "tsc=nowatchdog" ];
   };
 

@@ -7,7 +7,7 @@ with lib;
       systemd.enable = mkIf config.boot.plymouth.enable true;
       verbose = mkDefault false;
     };
-    kernelPackages = mkDefault pkgs.linuxPackages_6_1;
+    kernelPackages = mkDefault pkgs.linuxPackages_6_6;
     kernelParams = [ "boot.shell_on_fail" "quiet" ];
     loader = {
       efi.canTouchEfiVariables = mkDefault false;
