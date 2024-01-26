@@ -63,7 +63,10 @@ in {
     '';
 
     home.packages = lib.mkIf (config.roles.desktop != null) (with pkgs; [
-      element-desktop
+      (writeShellScriptBin "element-desktop" ''
+        export LD_LIBRARY_PATH='${libnotify}/lib'
+        exec "${element-desktop}/bin/element-desktop" "$@"
+      '')
       gimp
       google-chrome
       nethack
