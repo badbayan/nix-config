@@ -68,7 +68,9 @@ in {
       translate-shell
       unrar
       unzip
-      vim
+      (vim.customize {
+        vimrcConfig.beforePlugins = builtins.readFile ./vim/vimrc;
+      })
       zip
     ];
   };

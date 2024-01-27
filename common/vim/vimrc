@@ -1,0 +1,47 @@
+syntax on
+filetype plugin indent on
+set nocompatible nomodeline
+set noswapfile nobackup nowritebackup
+set noconfirm hidden
+set viminfo='100,<500,s100,h,n~/.cache/viminfo
+set backspace=indent,eol,start
+set belloff=all mouse=a clipboard=unnamed
+set omnifunc=syntaxcomplete#Complete
+set completeopt=menuone,longest,preview
+set wildmenu showmatch nonumber scrolloff=5
+set wrap wrapscan diffopt+=followwrap linebreak
+set showmode showcmd ruler title
+set showtabline=1 laststatus=1
+set smartindent autoindent cindent
+set tabstop=4 shiftwidth=4 expandtab
+set hlsearch incsearch ignorecase smartcase
+set encoding=utf-8 termencoding=utf-8
+set fileencoding=utf-8 fileencodings=utf-8,cp1251
+set fileformat=unix fileformats=unix,dos,mac
+set background=dark
+colorscheme quiet
+
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+nnoremap <silent> gt :tabnew<CR>
+nnoremap <silent> gw :tabc<CR>
+nnoremap <silent> gb :qa<CR>
+nnoremap <silent> gB :qa!<CR>
+nnoremap <silent> gc :bw<CR>
+nnoremap <silent> gC :bw!<CR>
+nnoremap <silent> gh :bp<CR>
+nnoremap <silent> gl :bn<CR>
+nnoremap <silent> gz :pclose<CR>
+nnoremap <silent> <Esc>h :bp<CR>
+nnoremap <silent> <Esc>l :bn<CR>
+nnoremap <silent> <Esc>k :N<CR>
+nnoremap <silent> <Esc>j :n<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <F9> :let &list =
+    \ ( &list == 0 ? 1 : 0 )<CR>
+nnoremap <silent> <F10> :let &background =
+    \ ( &background == "dark" ? "light" : "dark" )<CR>
+
+let g:netrw_dirhistmax = 0
+autocmd CompleteDone * pclose
+autocmd FileType text,markdown setlocal nolist
