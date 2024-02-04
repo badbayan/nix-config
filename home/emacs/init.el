@@ -23,6 +23,7 @@
 (setq-default
  auto-save-default nil
  backup-inhibited t
+ calendar-week-start-day 1
  column-number-mode t
  completion-category-defaults nil
  completion-category-overrides '((file (styles partial-completion)))
@@ -110,6 +111,14 @@
 (global-set-key (kbd "<f8>") 'indent-tabs-mode)
 (global-set-key (kbd "<f9>") 'revert-buffer-with-coding-system)
 
+(defun insert-file-name (filename &optional args)
+  ;; https://www.emacswiki.org/emacs/InsertFileName
+  (interactive "*GInsert file name: \nP")
+  (cond ((eq '- args) (insert (file-relative-name filename)))
+        ((not (null args)) (insert (expand-file-name filename)))
+        (t (insert filename))))
+(global-set-key (kbd "C-x M-i") 'insert-file-name)
+
 
 
 (require 'package)
@@ -177,6 +186,7 @@
          ("M-g I" . consult-imenu-multi)
          ("M-g o" . consult-outline)
          ("M-s d" . consult-find)
+         ("M-s f" . consult-fd)
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
