@@ -5,6 +5,7 @@ let
 in {
   i18n.defaultLocale = mkDefault "ru_RU.UTF-8";
   time.timeZone = mkDefault "Asia/Novosibirsk";
+  users.defaultUserShell = pkgs.zsh;
 
   services = {
     fwupd.enable = mkDefault true;
@@ -18,6 +19,7 @@ in {
 
   environment = {
     localBinInPath = mkDefault true;
+    pathsToLink = [ "/libexec" ];
 
     sessionVariables = {
       EDITOR = "vi";

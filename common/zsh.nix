@@ -1,16 +1,6 @@
 { pkgs, ... }:
 
 {
-  environment = {
-    pathsToLink = [
-      "/libexec"
-      "/share/zsh"
-    ];
-    shells = with pkgs; [ zsh ];
-  };
-
-  users.defaultUserShell = pkgs.zsh;
-
   programs.zsh = {
     enable = true;
     histFile = "~/.histfile";
@@ -67,13 +57,6 @@
       [[ -s "/etc/profiles/per-user/''${USER}/etc/profile.d/hm-session-vars.sh" ]] && \
           source "/etc/profiles/per-user/''${USER}/etc/profile.d/hm-session-vars.sh"
     '';
-    shellAliases = {
-      ls = "ls --color=auto";
-      grep = "grep --color=auto";
-      diff = "diff --color=auto";
-      ee = "emacsclient -nw -c -q -u -a 'emacs -nw'";
-      tmux = "systemd-run --user --scope --setenv=SHLVL=0 tmux";
-    };
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
   };
