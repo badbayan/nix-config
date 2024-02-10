@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = with inputs.self; [
+  imports = with inputs.self.modules; [
     ./hardware-configuration.nix
 
     users.taisa
@@ -9,9 +9,11 @@
 
   roles.desktop = "kde";
 
-  documentation.doc.enable = false;
-  documentation.man.enable = false;
-  documentation.nixos.enable = false;
+  documentation = {
+    doc.enable = false;
+    man.enable = false;
+    nixos.enable = false;
+  };
 
   boot = {
     loader.systemd-boot.enable = true;

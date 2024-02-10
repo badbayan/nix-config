@@ -15,7 +15,7 @@ in {
   environment.gnome.excludePackages = with pkgs; [ gnome-text-editor ];
 
   home-manager.users.${user} = {
-    imports = with inputs.self.home; lib.optionals (config.roles.desktop != null) [
+    imports = with inputs.self.modules.home; lib.optionals (config.roles.desktop != null) [
       dicts
       emacs
       obs

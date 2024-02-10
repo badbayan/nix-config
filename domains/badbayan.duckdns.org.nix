@@ -38,7 +38,7 @@ in {
     # vaultwarden.enable = true;
   };
 
-  age.secrets = with inputs.self; {
+  age.secrets = with inputs.self.modules; {
     ${dns}.file = secrets.${dns};
     miniflux.file = secrets.miniflux;
     # nextcloud = {

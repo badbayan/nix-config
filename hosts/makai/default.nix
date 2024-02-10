@@ -1,7 +1,7 @@
 { lib, pkgs, inputs, ... }:
 
 {
-  imports = with inputs.self; [
+  imports = with inputs.self.modules; [
     ./hardware-configuration.nix
 
     users.aya

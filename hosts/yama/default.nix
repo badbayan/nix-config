@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = with inputs.self; [
+  imports = with inputs.self.modules; [
     ./hardware-configuration.nix
 
     domains."badbayan.duckdns.org"
@@ -51,7 +51,7 @@
     };
   };
 
-  age.secrets = with inputs.self; {
+  age.secrets = with inputs.self.modules; {
     yama-wg0.file = secrets.yama-wg0;
     yama-wg0-oneplus.file = secrets.yama-wg0-oneplus;
     yama-wg0-fail2banana.file = secrets.yama-wg0-fail2banana;

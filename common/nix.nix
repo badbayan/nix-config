@@ -21,7 +21,12 @@ with lib;
       "nixpkgs=${inputs.nixpkgs}"
     ];
 
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    registry = {
+      nix-config.flake = inputs.self;
+      nixpkgs.flake = inputs.nixpkgs;
+      home-manager.flake = inputs.home-manager;
+      agenix.flake = inputs.agenix;
+    };
 
     settings = {
       auto-optimise-store = true;
