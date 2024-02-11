@@ -28,7 +28,7 @@
       mkdir -p $out/lib/firmware/intel
       cd $out/lib/firmware/intel
       for ext in ddc sfi; do
-        ln -sf ${firmware}/lib/firmware/intel/ibt-1040-4150.$ext ibt-0040-1050.$ext
+        xzcat ${firmware}/lib/firmware/intel/ibt-1040-4150.$ext.xz > ibt-0040-1050.$ext
       done
     '';
   in [ ibt-0040-1050 ];
