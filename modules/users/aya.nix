@@ -18,6 +18,7 @@ in {
     imports = with inputs.self.modules.home; lib.optionals (config.roles.desktop != null) [
       dicts
       emacs
+      nethack
       obs
     ];
 
@@ -56,12 +57,6 @@ in {
       };
     };
 
-    home.file.".nethackrc".text = ''
-      OPTIONS=color,msg_window:full,symset:curses,time
-      OPTIONS=gender:random,!legacy,number_pad:1
-      OPTIONS=pickup_burden:unencumbered,pickup_types:$?!/="+
-    '';
-
     home.packages = lib.mkIf (config.roles.desktop != null) (with pkgs; [
       (writeShellScriptBin "element-desktop" ''
         export LD_LIBRARY_PATH='${libnotify}/lib'
@@ -69,7 +64,6 @@ in {
       '')
       gimp
       google-chrome
-      nethack
     ]);
   };
 }

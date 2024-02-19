@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 with lib;
 let
-  find = "fd -calways -uE'.git' --strip-cwd-prefix";
+  find = "${pkgs.fd}/bin/fd -calways -uE'.git' --strip-cwd-prefix";
 in {
   i18n.defaultLocale = mkDefault "ru_RU.UTF-8";
   time.timeZone = mkDefault "Asia/Novosibirsk";
@@ -70,9 +70,7 @@ in {
       translate-shell
       unrar
       unzip
-      (vim.customize {
-        vimrcConfig.beforePlugins = builtins.readFile ./vim/vimrc;
-      })
+      vim-with-vimrc
       zip
     ];
   };

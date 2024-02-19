@@ -4,27 +4,21 @@ rec {
   specialArgs = { inherit inputs; };
   forAllSystems = inputs.nixpkgs.lib.genAttrs inputs.nixpkgs.lib.systems.flakeExposed;
 
-  listDir = dir: builtins.attrNames (builtins.readDir dir);
   match' = regex: builtins.match ("(.*)" + regex);
-  endsWith = regex: str: match' regex str != null;
+  endsWith = regex: str: match' regex (if builtins.isPath str then
+    builtins.baseNameOf str else str) != null;
   desuffix = regex: str: if (endsWith regex str) then
     (builtins.head (match' regex str)) else str;
-  hasSuffix = regex: dir: name:
-    builtins.pathExists (dir + "/${name}") && endsWith regex name;
-  isModule = dir: name:
-    builtins.pathExists (dir + "/${name}/default.nix") ||
-    (hasSuffix "\\.nix" dir name && name != "default.nix");
-  filterDir = regex: dir: builtins.filter
-    ((if regex == "\\.nix"
-      then isModule
-      else hasSuffix regex
-    ) dir) (listDir dir);
-  asAttrs = regex: dir: builtins.listToAttrs
-    (map (name: {
-      name = desuffix regex name;
-      value = dir + "/${name}";
-    }) (filterDir regex dir));
-  asList = regex: dir: builtins.attrValues (asAttrs regex dir);
+  isDir = path: builtins.readFileType path == "directory";
+  listDir = path: builtins.concatMap (n: [ (path + "/${n}") ])
+    (builtins.attrNames (if isDir path then builtins.readDir path else {}));
+  recListDir = path: builtins.concatMap (n:
+    if isDir n then recListDir n else [ n ]) (listDir path);
+  asAttrs = regex: path: builtins.listToAttrs
+    (builtins.map (n: {
+      name = desuffix regex (builtins.baseNameOf n);
+      value = n;
+    }) (builtins.filter (s: endsWith regex s && !isDir s) (listDir path)));
 
   mkSystem = system: conf: inputs.nixpkgs.lib.nixosSystem {
     inherit system specialArgs;
@@ -33,11 +27,6 @@ rec {
       inputs.flake-programs-sqlite.nixosModules.programs-sqlite
       inputs.home-manager.nixosModules.home-manager
       inputs.impermanence.nixosModules.impermanence
-    ] ++ (builtins.concatLists [
-      (asList "\\.nix" ./common)
-      (asList "\\.nix" ./roles)
-      (asList "\\.nix" ./services)
-      conf
-    ]);
+    ] ++ (builtins.filter (endsWith "\\.nix") (recListDir ./nixos)) ++ conf;
   };
 }

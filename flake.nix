@@ -30,27 +30,30 @@
   };
 
   outputs = inputs @ { self, nixpkgs, nixos-hardware, ... }:
-    let inherit (import ./lib.nix { inherit inputs; }) forAllSystems asAttrs mkSystem;
+    let inherit (import ./lib.nix { inherit inputs; })
+      forAllSystems isDir listDir asAttrs mkSystem;
     in {
-      modules = {
-        domains = asAttrs "\\.nix" ./domains;
-        home = asAttrs "\\.nix" ./home;
+      modules = builtins.listToAttrs (builtins.map (s: {
+        name = builtins.baseNameOf s;
+        value = asAttrs "\\.nix" s;
+      }) (builtins.filter isDir (listDir ./modules))) // {
         secrets = asAttrs "\\.age" ./secrets;
-        users = asAttrs "\\.nix" ./users;
       };
 
       overlays = builtins.mapAttrs (_: import) (asAttrs "\\.nix" ./overlays);
 
-      hydraJobs = builtins.mapAttrs (_: host:
-        host.config.system.build.toplevel) self.nixosConfigurations;
-
       devShells = forAllSystems (system:
-        with import nixpkgs { inherit system; }; {
+        with import nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues self.overlays;
+        }; {
           default = mkShell {
             nativeBuildInputs = with pkgs; [
               inputs.agenix.packages.${system}.agenix
+              inputs.home-manager.packages.${system}.home-manager
               deadnix
               statix
+              vim-with-vimrc
             ];
           };
         });

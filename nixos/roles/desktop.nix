@@ -133,13 +133,7 @@ in {
         xdg-user-dirs
         xdg-utils
         xsettingsd
-        (writeShellScriptBin "xterm" ''
-          if [ "$XDG_SESSION_TYPE" = wayland ]; then
-              exec foot -d warning -a "''${TERMCLASS:-foot}" "$@"
-          else
-              exec alacritty --class "''${TERMCLASS:-Alacritty},Alacritty" "$@"
-          fi
-        '')
+        xterm'
         yt-dlp
         zathura
       ];
@@ -150,9 +144,7 @@ in {
       fontDir.enable = true;
       packages = with pkgs; [
         dejavu_fonts
-        (iosevka-bin.override {
-          variant = "curly";
-        })
+        iosevka'
         freefont_ttf
         # gyre-fonts
         liberation_ttf
