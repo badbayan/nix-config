@@ -12,9 +12,25 @@
   nix.gc.automatic = lib.mkForce false;
 
   boot = {
-    loader.grub = {
-      enable = true;
-      device = "/dev/sda";
+    loader = {
+      # grub = {
+      #   enable = true;
+      #   device = "/dev/sda";
+      # };
+      systemd-boot = {
+        enable = true;
+        extraEntries = {
+          "shell.conf" = ''
+            title UEFI Shell
+            efi /efi/shell/shell.efi
+          '';
+        };
+        extraFiles = {
+          "efi/clover/cloverx64.efi" = "${pkgs.systemd}/lib/systemd/boot/efi/systemd-bootx64.efi";
+          "efi/shell/shell.efi" = pkgs.edk2-uefi-shell.efi;
+        };
+      };
+      timeout = 2;
     };
     kernelPackages = pkgs.linuxPackages_6_6;
     kernelParams = [ "acpi_backlight=native" ];
